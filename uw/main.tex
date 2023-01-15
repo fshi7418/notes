@@ -134,6 +134,86 @@
 
 \section{Forwards and Futures}
 
+\begin{definition} \label{def:151}
+\index{Forward}
+\index{Forward Price}
+A \textbf{forward} contract is a non-standardised agreement to buy or sell an asset at a certain future time \(T\) at a certain price \(K\), where \(K\) is known as the \textbf{delivery price} or the \textbf{forward price}.
+\end{definition}
+
+\begin{remark} \label{rmk:152}
+The delivery price is determined such that the value of the contract at inception is 0, i.e. no money is
+exchanged at the inception of a forward.\\
+\indent The part who agrees to buy the underlying has a long position.
+\end{remark}
+
+\begin{remark}[Forwards Payoff] \label{rmk:153}
+Suppose a forward contract has expiration date \(T\), forward price \(K\), then the payoff to the long position
+in the forward at time \(T\) is \(S_T - K\) and to the short position at time \(T\) is \(K - S_T\).
+\end{remark}
+
+\begin{proposition} \label{prop:154}
+Suppose a forward contract has underlying asset to be a non-dividend stock with spot \(S_0\) at inception,
+and the forward has maturity at \(T\). If the annual effective rate is \(r\) compounded continuously,
+then for any \(t \in [0, T]\) then no-arbitrage forward price is
+\[
+K = S_te^{r(T - t)}
+\]
+\end{proposition}
+
+\begin{proof} Fix \(t \in [0, T)\). At time \(t\), suppose we enter a long forward agreement with forward
+price \(K\) and short one share of the underlying stock at \(S_t\), and invest \(S_t\) at \(r\), then the cash
+proceeds at time \(t\) is \(0 + S_t - S_t = 0\). \\
+\indent At time \(T\), the payoff of this strategy is
+\[
+S_T - K - S_T + S_te^{r(T - t)} = S_te^{r(T - t)} - K.
+\]
+\indent If \(S_te^{r(T - t)} - K > 0\), then we have an arbitrage opportunity since the initial cost was 0. 
+If $S_te^{r(T - t)} < K$ then we could have done the reverse (i.e. short the forward and borrow \(S_t\) to buy 
+one share of the stock, and this would have led to 0 initial cost but positive final payoff.\\
+\indent By the Law of One Price, we have
+\[  
+K = S_te^{r(T - t)}.
+\]
+\end{proof}
+
+\begin{theorem} \label{thm:155}
+Suppose a forward contract has a dividend-paying stock as underlying which has dividends \(D_1, \ldots, D_n\)
+at time \(t_1, \ldots, t_n\) before expiration date \(T\), and that the interest rate is \(r\) compounded
+continuously, then the forward price \(K\) at time \(t \in [0, T]\) is
+\[
+K_t = S_te^{r(T - t)} - \sum_{i=1}^nD_ie^{r(T - t_i)}
+\]
+where \(S_t\) is the stock price at time \(t\) and \(t_n > t_{n - 1} > \dots > t_1 \geq t\).
+\end{theorem}
+        
+\begin{proof}
+Fix time \(t \in [0, T]\) and consider two portfolios at \(t\). \\
+\indent Portfolio \(A\) has long forward and cash amount of \(Ke^{r(T - t)} + \sum_{i=1}^n D_ie^{-r(t_i - t)}\)
+invested at \(r\). \\
+\indent Portfolio \(B\) longs one share of the stock and reinvests dividends at rate \(r\). \\
+\indent At time \(T\), portfolio \(A\) has payoff
+\[
+\begin{aligned}
+&S_T - K + Ke^{r(T - t)}e^{r(T - t)} + \sum_{i=1}^n D_ie^{-r(t_i - t)}e^{r(T - t)} \\
+= &S_T - K + K + \sum_{i=1}^n D_i e^{r(T - t_i)} \\
+= &S_T + \sum_{i=1}^nD_ie^{r(T - t_i)}
+\end{aligned}
+\]
+and portfolio \(B\) has payoff
+\[
+S_T + \sum_{i=1}^nD_ie^{r(T - t_i)}.
+\]
+\indent Because \(A\) and \(B\) have the same payoffs at \(T\), the initial investments must be the same by the
+Law of One Price, so
+\[
+Ke^{r(T - t)} + \sum_{i=1}^nD_ie^{-r(t_i - t)} = S_t
+\]
+i.e.
+\[
+K = S_te^{r(T - t)} - \sum_{i=1}^nD_ie^{r(T - t_i)}.
+\]
+\end{proof}
+
 %------------------------------------------------
 
 \section{Options}
@@ -1568,7 +1648,7 @@ By \hyperref[cor:418]{Corollary 4.1.8}, the solution to the Black-Scholes PDE ha
 \[
 dS_t = rS_tdt + \sigma S_tdW_t^Q
 \]
-where \(Q\) is a result of the \hyperref[thm；416]{Feynman-Kac Theorem}. \\
+where \(Q\) is a result of the \hyperref[thm:415]{Feynman-Kac Theorem}. \\
 \indent Define the process \((\Psi_t)_t\) such that \(\Psi_t = \frac{r - \mu}{\sigma}\) for all \(t > 0\). Note that
 \[
 E^P\left(e^{\frac12\int_0^T\frac{(r - \mu)^2}{\sigma^2}dt}\right) = E^P\left(e^{\frac12T(t - \mu)^2/\sigma^2}\right) < \infty
@@ -1731,7 +1811,7 @@ L(S; S, T) = -\frac{p(t, T) - 1}{(T - S)p(t, T)}.
 \begin{definition} \label{def:515}
 \index{Simple spot rate}
 \index{LIBOR spot rate}
-The \textbf{simple spot rate} or the \textbf{LIBOR spot rate} for \([S, T]\) is the \(L(S; S, T)\) in \hyperref[prop:514]{Proposition 5.1.4} above.
+The \textbf{simple spot rate} or the \textbf{LIBOR spot rate} for \([S, T]\) is the \(L(S; S, T)\) in \hyperref[proposition:514]{Proposition 5.1.4} above.
 \end{definition}
 
 \begin{definition} \label{prop:516}
@@ -1965,7 +2045,7 @@ dr(s) = (\mu - \sigma\lambda)ds + \sigma dW_s^Q
 with initial condition \(r(t) \in \bR\).
 \end{theorem}
 \begin{proof}
-Direct application of \hyperref[thm:416]{Feynman-Kac Theorem}.
+Direct application of \hyperref[thm:414]{Feynman-Kac Theorem}.
 \end{proof}
 
 \begin{corollary} \label{cor:528}
