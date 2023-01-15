@@ -1,0 +1,2393 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Legrand Orange Book
+% LaTeX Template
+% Version 2.4 (26/09/2018)
+%
+% This template was downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Mathias Legrand (legrand.mathias@gmail.com) with modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Compiling this template:
+% This template uses biber for its bibliography and makeindex for its index.
+% When you first open the template, compile it from the command line with the 
+% commands below to make sure your LaTeX distribution is configured correctly:
+%
+% 1) pdflatex main
+% 2) makeindex main.idx -s StyleInd.ist
+% 3) biber main
+% 4) pdflatex main x 2
+%
+% After this, when you wish to update the bibliography/index use the appropriate
+% command above and make sure to compile with pdflatex several times 
+% afterwards to propagate your changes to the document.
+%
+% This template also uses a number of packages which may need to be
+% updated to the newest versions for the template to compile. It is strongly
+% recommended you update your LaTeX distribution if you have any
+% compilation errors.
+%
+% Important note:
+% Chapter heading images should have a 2:1 width:height ratio,
+% e.g. 920px width and 460px height.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\input{structure.tex} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+%\hypersetup{pdftitle={Title},pdfauthor={Author}} % Uncomment and fill out to include PDF metadata for the author and title of the book
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begingroup
+\thispagestyle{empty} % Suppress headers and footers on the title page
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{background.pdf}};
+\draw (current page.center) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering MF \\[15pt] % Book title
+{\Large ACTSC 446 - Mathematics of Financial Markets}\\[20pt] % Subtitle
+{\huge Prof. Christiane Lemieux}
+}}; % Author name
+\end{tikzpicture}
+\vfill
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+\noindent Copyright \copyright\ Fall 2021 Prof. Christiane Lemieux\\ % Copyright notice
+
+%\noindent \textsc{Not Published}\\ % Publisher
+
+% \noindent \textsc{book-website.com}\\ % URL
+
+%\noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\ % License information, replace this with your own license (if any)
+%
+%\noindent \textit{First printing, March 2019} % Printing/edition date
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
+
+\chapterimage{chapter_head_1.pdf} % Table of contents heading image
+
+\pagestyle{empty} % Disable headers and footers for the following pages
+
+\tableofcontents % Print the table of contents itself
+
+\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right side of the book
+
+\pagestyle{fancy} % Enable headers and footers again
+
+%----------------------------------------------------------------------------------------
+%	PART
+%----------------------------------------------------------------------------------------
+
+%\part{Part One}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 1
+%----------------------------------------------------------------------------------------
+
+\chapterimage{chapter_head_2.pdf} % Chapter heading image
+
+\chapter{Introduction to Derivatices Markets}
+
+\section{Financial Markets, Assets}
+
+%------------------------------------------------
+
+\section{Present Value of Future Payments}
+
+%------------------------------------------------
+
+\section{Derivatives}
+
+%------------------------------------------------
+
+\section{Arbitrage}
+
+%------------------------------------------------
+
+\section{Forwards and Futures}
+
+%------------------------------------------------
+
+\section{Options}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 2
+%----------------------------------------------------------------------------------------
+
+\chapterimage{chapter_head_1.pdf} % Chapter heading image
+
+\chapter{Discrete Time Models}
+
+%----------------------------------------------------------------------------------------
+
+\section{One-Period Binomial Model}
+
+%----------------------------------------------------------------------------------------
+
+\section{Multi-Period Binomial Model}
+
+%----------------------------------------------------------------------------------------
+
+\section{Option Pricing in the Binomial World}
+
+%----------------------------------------------------------------------------------------
+
+\section{Dividends}
+
+%----------------------------------------------------------------------------------------
+
+\section{Exotic Options}
+
+%----------------------------------------------------------------------------------------
+
+\section{General Discrete-Time Market Models}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 3
+%----------------------------------------------------------------------------------------
+
+\chapterimage{chapter_head_1.pdf} % Chapter heading image
+
+\chapter{Basic Stochastic Processes}
+
+%----------------------------------------------------------------------------------------
+
+\section{Information and Filtration}
+
+\begin{definition} \label{def:311}
+\index{Information set}
+Let \(\{X_t: t \in [0, \infty)\}\) be a continuous-time stochastic process over probability space \((\Omega, \F, P)\) (STAT330 (S) Remark 1.1.6). The \textbf{information set} at time \(t\), denoted \(\F_t\), represents everything we know about \(X_t\)'s sample path. \\
+\indent We assume that
+\[
+\F_s \subseteq \F_t
+\]
+for all \(0 \leq s \leq t\), i.e. no information is forgotten.
+\end{definition}
+
+\begin{example} \label{eg:312}
+Consider the following 2-period binomial model.\\
+  \begin{tikzpicture}[>=stealth,sloped]
+    \matrix (tree) [%
+      matrix of nodes,
+      minimum size=1cm,
+      column sep=1cm,
+      row sep=0.25cm,nodes={text width=8em}
+          ]
+    {
+          &   &  24.2\\
+          & 22 &   \\
+     20 &   &  20\\
+          &  18 &   \\
+          &   &  16.2\\
+    };
+    \node[bullet,left=3.14mm of tree-3-1.west](b-3-1){};
+%    \node[bullet,left=3.14mm of tree-2-2.west,label=above:22,label=below:2.057](b-2-2){};
+    \node[bullet,left=3.14mm of tree-2-2.west](b-2-2){};
+    \node[bullet,left=3.14mm of tree-4-2.west](b-4-2){};
+    \node[bullet,left=3.14mm of tree-1-3.west](b-1-3){};
+    \node[bullet,left=3.14mm of tree-3-3.west](b-3-3){};
+    \node[bullet,left=3.14mm of tree-5-3.west](b-5-3){};
+    \draw[->] (b-3-1) -- (b-2-2) node [midway, above] {\(u\)};
+    \draw[->] (b-3-1) -- (b-4-2) node [midway, below] {\(d\)};
+    \draw[->] (b-2-2) -- (b-1-3) node [midway, above] {\(u\)};
+    \draw[->] (b-2-2) -- (b-3-3) node [midway, below] {\(d\)};
+    \draw[->] (b-4-2) -- (b-3-3) node [midway, above] {\(u\)};
+    \draw[->] (b-4-2) -- (b-5-3) node [midway, below] {\(d\)};
+  \end{tikzpicture}
+
+\indent Here \(\Omega = \{\omega_i: 1 \leq i \leq 4\}\) where \(\omega_1\) is the \(uu\) path, \(\omega_2\) is the \(ud\) path, \(\omega_3\) is the \(du\) path and \(\omega_4\) is the \(dd\) path. We also have
+\[
+\begin{aligned}
+\F_0 &= \{\Omega, \emptyset\} \\
+\F_1 &= \{\Omega, \{\omega_1, \omega_2\}, \{\omega_3, \omega_4\}, \emptyset\} \\
+\F_2 &= \P(\Omega), \text{ the power set of } \Omega
+\end{aligned}
+\]
+\end{example}
+
+\begin{definition} \label{def:313}
+\index{Filtration}
+\index{Filtered probability space}
+\index{Filtered probability space!Adapted}
+Let \((\Omega, \F, P)\) be a probability space. A collection \(\{\F_t: t \in [0, \infty)\}\) of \(\sigma\)-algebras over \(\Omega\) is called a \textbf{filtration} when \(\F_s \subseteq \F_t \subseteq \F\) for all \(0 \leq s \leq t < \infty\). A probability space with such a filtration is a \textbf{filtered probability space} and is denoted \((\Omega, \{\F_t\}_t, \F, P)\). A continuous time stochastic process over \((\Omega, \{\F_t\}_t, \F, P)\) is \textbf{adapted} to \(\{\F_t\}_t\) if every \(X_t\) (from the underlying stochastic process) is \(\F_t\)-measurable, i.e. for every possible values \(r \in \bR\), \(X_t^{-1}(\{x \in \bR: x \leq r\}) \in \F_t\).
+\end{definition}
+
+\begin{definition} \label{def:314}
+\index{Martingale}
+\index{Martingale property}
+A stochastic process \(X = \{X_t: t \in [0, \infty)\}\) defined on a filtered probability space \((\Omega, \{\F_t\}_t, \F, P)\) is called a \textbf{martingale} with respect to \(\{\F_t\}_t\) if
+\begin{enumerate}
+\item \(X\) is adapted to \(\{\F_t\}_t\).
+\item \(E(|X_t|) < \infty\) for all \(t \in [0, \infty)\). 
+\item (\textbf{martingale property}) \(E(X_t | \F_s) = X_s\) almost surely for all \(0 \leq s < t < \infty\).
+\end{enumerate}
+\end{definition}
+
+\begin{remark} \label{rmk:315}
+In measure theory terms, we have the concept ``almost everywhere'' with respect to a particular measure. \\
+\indent So \(E(X_t|\F_s) = X_s\) almost surely means
+\[
+\Pr(E(X_t|\F_s) \neq X_s) = 0.
+\]
+\end{remark}
+
+\begin{example} \label{eg:316}
+Let \(X := \{X_t: t \in [0, \infty)\}\) be a stochastic process based on a filtered probability space \((\Omega, \{\F_t\}_t, \F, P)\). Define random variable
+\[
+Z_t := E(X | \F_t).
+\]
+\indent Assume \(E(|X|) < \infty\). Consider the stochastic process
+\[
+Z := \{Z_t: t \in [0, \infty)\}.
+\]
+\indent Because each \(\F_t\) is a \(\sigma\)-algebra in \(\Omega\), each \(Z_t\) is \(\F_t\)-measurable, hence \(Z\) is adapted to \(\{\F_t\}_t\). Next,
+\[
+E(|Z_t|) = E(|E(X | \F_t)|) \leq E(E(|X| | \F_t)) = E(|X|)
+\]
+by Law of Total Expectation. By assumption,
+\[
+E(|Z_t|) \leq E(|X|) < \infty.
+\]
+\indent Finally if \(s < t\), then
+\[
+E(Z_t|\F_s) = E(E(X|\F_t)|\F_s) = E(X|\F_s) = Z_s
+\]
+by another application of Law of Total Expectation. \\
+\indent Hence \(Z\) is a martingale.
+\end{example}
+
+\begin{remark} \label{rmk:317}
+Intuitively, a stochastic process behaves like a martingale if it follows no discernable pattern, i.e. the best forecast of a future value is the currently observed value. \\
+\indent Formally, for an arbitrary \(u > 0\), if \(\{X_t\}_{t \geq 0}\) is a martingale, then
+\[
+E(X_{t + u} - X_t | \F_t) = E(X_{t + u}|\F_t) - E(X_t|\F_t) = E(X_t|\F_t) - E(X_t|\F_t) = 0.
+\]
+\indent A martingale is defined with respect to a filtration and a probability measure. A non-martingale process may be converted into a martingale through a change of measure.
+\end{remark}
+
+%----------------------------------------------------------------------------------------
+
+\section{Brownian Motion}
+
+\begin{definition} \label{def:321}
+\index{Brownian motion}
+A continuous-time stochastic process \(\{W_t: t \geq 0\}\) on a probability space \((\Omega, \F, P)\) is a \textbf{standard one-dimensional Brownian motion} if
+\begin{enumerate}
+\item \(W_0(\omega) = 0\) for all \(\omega \in \Omega\).
+\item The sample paths \(t\mapsto W(t, \omega)\) are continuous for all \(\omega \in \Omega\).
+\item For all \(0 \leq s < t\), \(W_t - W_s \sim N(0, t - s)\).
+\item For all \(0 = t_0 < t_1 < t_2 < \ldots < t_n < \infty\), we have the random variables \(W_{t_1} - W_{t_0}\), \(W_{t_2} - W_{t_1}\), \(\ldots\), \(W_{t_n} - W_{t_{n - 1}}\) to be independent.
+\end{enumerate}
+\end{definition}
+
+\begin{remark} \label{rmk:322}
+Stock price movements are often modelled using Brownian motion due to the latter's frantal nature.
+\end{remark}
+
+\begin{definition} \label{def:323}
+\index{Brownian motion!Drift}
+\index{Brownian motion!Diffusion}
+A Brownian motion with \textbf{drift} \(\mu\) and \textbf{diffusion} coefficient \(\sigma\) is
+\[
+X_t = \mu t + \sigma W_t, t \geq 0
+\]
+where \(\{W_t\}_t\) is a standard Brownian motion.
+\end{definition}
+
+\begin{proposition} \label{prop:324}
+A Brownian motion \(\{X_t\}_t\) with drift \(\mu\) and diffusion coefficient \(\sigma\) satisfies
+\[
+X_t - X_s \sim N(\mu(t - s), \sigma^2(t - s))
+\]
+for all \(0 \leq s < t\).
+\end{proposition}
+\begin{proof} We have \(X_t - X_s = \mu t + \sigma W_t - \mu s - \sigma W_s = \mu(t - s)+\sigma(W_t - W_s)\) where \(W_t - W_s \sim N(0, t - s)\). Hence
+\[
+E(X_t - X_s) = \mu(t - s) + \sigma E(W_t - W_s) = \mu(t - s)
+\]
+and \(\var(X_t - X_s) = \sigma^2\var(W_t - W_s) = \sigma^2(s - t)\) and follows a normal distribution.
+\end{proof}
+
+\begin{definition} \label{def:325}
+A random variable \(X\) on a probability space \(\Omega, \F, P)\) is \textbf{independent of a \(\sigma\)-algebra} \(\F_0 \subseteq \P(\Omega)\) if for any event \(A \in \Omega\) corresponding to \(X \in \B\) where \(\B\) is a Borel set in \(\bR\), and any \(C \in \F_0\), we have
+\[
+\Pr(A \cap C) = \Pr(A)\Pr(C).
+\]
+\end{definition}
+
+\begin{definition} \label{def:326}
+\index{Filtration!On standard Brownian motion}
+Let \(\{W_t\}_{t \geq 0}\) be a 1-dimensional standard Brownian motion on \((\Sigma, \F, P)\), then a \textbf{filtration for \(\{W_t\}_{t \geq 0}\)} is a filtration \(\{\F_t\}_{t \geq 0}\) on \((\Sigma, \F, P)\) such that
+\begin{enumerate}
+    \item \(\{W_t\}_{t\geq0}\) is adapted to \(\{\F_t\}_{t\geq0}\).
+    \item For all \(0 \leq s < t\), the increment \(W_t - W_s\) is independent of the \(\sigma\)-algebra \(\F_s\)
+\end{enumerate}
+\end{definition}
+
+\begin{remark} \label{rmk:327}
+A filtration on a standard Brownian motion has the property that future increments do not depend on the information today.
+\end{remark}
+
+\begin{definition} \label{def:328}
+\index{Filtration!Generated by random variables}
+Let \(X_1, \ldots, X_n\) be rv's on \((\Omega, \F, P)\). A \textbf{filtration generated by \(X_1, \ldots, X_n\)} is the \(\sigma\)-algebra over \(\Omega\) generated by \((\Omega, \F, P)\), i.e. the collection of the inverse images of the Borel sets of \(\bR\):
+\[
+\{X_i^{-1}(S): S \in \B(\bR), 1 \leq i \leq n\}.
+\]
+\end{definition}
+
+\begin{definition} \label{def:329}
+For a standard Brownian motion \(\{W_t\}_{t \geq 0}\) over \((\Omega, \F, P)\), the filtration generated by \(\{W_t\}_{t\geq0}\) is a filtration for \(\{W_t\}_{t\geq0}\).
+\end{definition}
+\begin{proof}
+By \hyperref[def:328]{Def. 3.2.8}, clearly each \(W_t\) is measurable because the \(\sigma\)-algebras are generated with the inverse images of \(W_t\), so the filtration is adapted to \(\{\F_t\}_{t\geq0}\). \\
+\indent For the second property, let \(A \in \Omega\) such that \(A\) corresponds to \(W_t - W_s \in \B(\bR)\), and let \(C \in \F_s\), where \(\F_s\) is the \(\sigma\)-algebra generated by \(W_s\). Note that \(W_s = W_s - W_0\) and by \hyperref[def:321]{Def. 3.2.1}(3), \(W_t - W_s\) is independent of \(W_s - W_0\). Hence \(A\) and \(C\) are independent.
+\end{proof}
+
+\begin{remark} \label{rmk:3210}
+Another way of saying \hyperref[def:325]{Def. 3.2.5}, given \hyperref[def:328]{Def. 3.2.8}, is to say that the \(\sigma\)-algebra generated by \(X\) is independent of \(\F\).
+\end{remark}
+
+\begin{definition} \label{def:3211}
+\index{Independent \(\sigma\)-algebras}
+Let \(\Omega, \F, P)\) be a probability space and \(\F_1, \F_2\) be sub-\(\sigma\)-algebras of \(F\). \(F_1, F_2\) are \textbf{independent \(\sigma\)-algebras} if
+\[
+F_1 \perp F_2
+\]
+for all \(F_1 \in \F_1\) and \(F_2 \in \F_2\).
+\end{definition}
+
+\begin{proposition} \label{prop:3212}
+Let \(\{W_t\}_{t\geq0}\) be a standard Brownian motion on \((\Omega, \F, P)\) and \(\{\F_t\}_{t\geq0}\) be a filtration for \(\{W_t\}_{t\geq0}\), then
+\begin{enumerate}
+\item \(E(W_t) = 0\) and \(\var(W_t) = t\) for all \(t \geq 0\).
+\item For all \(0 \leq s \leq t\): \\
+(2.1) \(E(W_t|\F_s) = W_s\). \\
+(2.2) \(\var(W_t|\F_s) = t - s\). \\
+(2.3) \(\corr(W_t, W_s) = \min(s, t) = s\).
+\item \(\{W_t\}_{t\geq0}\) is a martingale with respect to \(\{F_t\}_{t\geq0}\).
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(1)By \hyperref[def:321]{Def. 3.2.1}(3), \(W_t - W_0 \sim N(0, t)\), so
+\[
+E(W_t) = E(W_t - W_0) = E(W_t) - E(W_0) = 0 - 0 = 0
+\]
+where \(\var(W_t) = \var(W_t - W_0) = t\). \\
+(2.1) \[
+\begin{aligned}
+E(W_t|\F_s) &= E(W_t - W_s + W_s | \F_s) \\
+&= E(W_t - W_s|\F_s) + E(W_s|\F_s) \\
+&= 0 + W_s \\
+&= W_s.
+\end{aligned}
+\]
+(2.2) \[
+\begin{aligned}
+\var(W_t|\F_s) &= \var(W_t - W_s + W_s|\F_s) \\
+&= \var(W_t - W_s | \F_s) + \var(W_s|\F_s) \text{ by independence} \\
+&= t - s + 0 \\
+&= t - s.
+\end{aligned}
+\]
+(2.3) \[
+\begin{aligned}
+\corr(W_t, W_s) &= E(W_tW_s) - E(W_t)E(W_s) \\
+&= E(W_tW_s) \\
+&= E((W_t - W_s + W_s)W_s) \\
+&= E((W_t - W_s)W_s) + E(W_s^2) \\
+&= E((W_t - W_s)(W_s - W_0)) + \var(W_s) \\
+&= 0 + \var(W_s) \text{ by independence} \\
+&= s.
+\end{aligned}
+\]
+(3) Clearly \(\{W_t\}_{t\geq0}\) is adapted to \(\{\F_t\}_{f\geq0}\) because \(\{\F_t\}_{t\geq0}\) is generated by \(\{W_t\}_{t\geq0}\). Moreover, equation 2.1 proves the martingale property, so it suffices to show that each
+\[
+E(|W_t|) < \infty.
+\]
+\indent By the Cauchy-Schwarz Inequality we have
+\[
+E(|W_t|) \leq \left(E(|W_t|^2)\right)^{\frac12} = \sqrt{t} < \infty.
+\]
+\indent This completes the proof.
+\end{proof}
+
+\begin{proposition} \label{prop:3213}
+The sample paths \(t\mapsto W_t(\omega)\) for a fixed \(\omega \in \Omega\) are continuous but nowhere differentiable.
+\end{proposition}
+\begin{proof} We omit the proof.\end{proof}
+
+\begin{definition} \label{def:3214}
+\index{Total variation}
+\index{Quadratic variation}
+\index{Bounded variation}
+\index{Unbounded variation}
+Let \(f:[0, T]\rightarrow\bR\) be a functionn and \(\Pi = \{t_i: 0 \leq i \leq n, 0 = t_0 < t_1 < \dots < t_n = T\}\) be a partition of \([0, T]\). The \textbf{total variation} of \(f\) is
+\[
+TV(f) = \lim_{||\Pi|| \rightarrow 0} \sum_{i=1}^n|f(t_i) - f(t_{i-1})|,
+\]
+the \textbf{quadratic variation} of \(f\) is
+\[
+QV(f) = [f, f]_T = \lim_{||\Pi||\rightarrow0}\sum_{i=1}^n(f(t_i) - f(t_{i-1}))^2
+\]
+where
+\[
+||\Pi|| = \max_{1 \leq i \leq n} t_i - t_{i-1}
+\]
+is the mesh of the partition. \\
+\indent \(f\) is \textbf{of bounded variation} if \(TV(f) < \infty\), and of \textbf{unbounded variation} if otherwise.
+\end{definition}
+
+\begin{theorem} \label{thm:3215}
+The sample paths of a Brownian motion \(\{W_t\}_{t\geq0}\), \(t \mapsto W_t(\omega)\), are of unbounded variation but
+\[
+QV(W) = (W, W)_T = T
+\]
+for all \(T\geq0\) with probability 1.
+\end{theorem}
+\begin{proof} We omit the proof.\end{proof}
+
+\begin{theorem} \label{thm:3216}
+Continuously differentiable functions have quadratic variations of 0.
+\end{theorem}
+\begin{proof} We omit the proof.\end{proof}
+
+\begin{theorem} \label{thm:3217}
+Let \(\{W_t\}_{t\geq0}\) be a Brownian motion, then
+\begin{enumerate}
+    \item \([W, t]_T = \lim_{||\Pi||\rightarrow0}\sum_{i=1}^n(W_{t_i} - W_{t_{i-1}})(t_i - t_{i-1}) = 0\).
+    \item \([t, t]_T = \lim_{||\Pi||\rightarrow0}\sum_{i=1}^n(t_i - t_{i-1})^2 = 0\).    
+\end{enumerate}
+\end{theorem}
+\begin{proof} We omit the proof.\end{proof}
+
+\begin{remark} \label{rmk:3218}
+Informally, we write the above results to be:\\
+\hyperref[thm:3215]{Thm. 3.2.15}: \(d(W, W)_t = dW_tdW_t = (dW_t)^2 = dt\). \\
+\hyperref[thm:3217]{Thm. 3.2.17}(1): \(d(W, T)_t = dW_tdt = 0\). \\
+\hyperref[thm:3217]{Thm. 3.2.17}(2): \(d(T, T)_t = dtdt = 0\). \\
+\end{remark}
+
+\begin{proposition} \label{prop:3219}
+Let \(\{W_t\}_{t\geq0}\) be a standard Brownian motion, then the process
+\[
+\{W_t^2 - t\}_{t\geq0}
+\]
+is a martingale with respect to the filtration generated by \(\{W_t\}_{t\geq0}\).
+\end{proposition}
+\begin{proof} Since \(\{W_t\}_{t\geq0}\) is adapted, so is \(\{W_t\}_{t\geq0}\) and therefore so is \(\{W_t - t\}_{t\geq0}\). \\
+\indent Next, \(E(|W_t^2 - t|) \leq E(|W_t^2|) + t\) by the triangle inequality, and so in turn
+\[
+E(|W_t^2 - t|) \leq E(W_t^2) + t = t + t = 2t < \infty.
+\]
+\indent Finally,
+\[
+\begin{aligned}
+&E(W_t^2 - t|\F_s) \text{ for } 0 \leq s < t \\
+= &E((W_t - W_s)^2 + 2(W_t - W_s)W_s + W_s^2 - t | \F_s) \\
+= &E((W_t - W_s)^2|\F_s) + 2W_sE(W_t - W_s|\F_s) + E(W_s^2|\F_s) - t \\
+= &\var(W_t - W_s) + 2W_s \cdot 0 + W_s^2 - t \\
+= &t - s + W_s^2 - t \\
+= &W_s^2 - s
+\end{aligned}
+\]
+which satisfies the martingale property.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+
+\section{The Ito Integral and the Ito-Doeblin Lemma}
+
+\begin{definition} \label{def:331}
+\index{Square-integrable process}
+\index{Ito integral}
+Let \((\Omega, \{\F_t\}_t, \F, P)\) be a filtered probability space such that \(\{\F_t\}_t\) is a filtration for a standard Brownian motion \(\{W_t\}_t\). Let \(f_t\) be a function of random variables depending on \(t\) such that
+\[
+E\left(\int_0^t f_u^2 du\right) < \infty.
+\]
+\indent Then we say \(\{f_t\}_t\) is a \textbf{square-integrable process} and we define the \textbf{Ito integral of \(\{f_t\}_t\)} to be the random variable
+\[
+I_t = \int_0^t f_udW_u = \lim_{n\rightarrow\infty}\sum_{[t_{i-1}, t_i] \in \Pi_n} H_{t_{i-1}}(W_{t_i} - W_{t_{i-1}})
+\]
+where \(\Pi_n  = \{0 = t_0 < t_1 < \dots < t_n = t\}\) is an \(n\)-partition of the interval \([0, t]\) and the convergence of the limit is convergence in probability.
+\end{definition}
+
+\begin{proposition} \label{prop:332}
+Let \(\{I_t\}_t\) be the Ito integral for \(\{f_t\}_t\), then
+\begin{enumerate}
+    \item \(I_t\) is a continuous function of \(t\).
+    \item For each \(t\), \(I_t\) is \(\F_t\)-measurable, i.e. for every Borel set \(B \in \B(\bR)\), \(I_t^{-1}(B) \in \F_t\).
+    \item For any constant \(c \in \bR\), 
+    \[
+    c\int_0^t f_udW_u  = \int_0^t cf_u dW_u.
+    \]
+    \item For square-integrable processes \((f_t)_t\) and \((g_t)_t\),
+    \[
+    \int_0^t f_udW_u + \int_0^t g_udW_u = \int_0^t(f_u + g_u)dW_u.
+    \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{theorem} \label{thm:333}
+\index{Ito integral!Martingale property}
+Let \(\{I_t\}_t\) be the Ito integral on a filtered probability space \((\Omega, \{\F_t\}_t, \F, P)\). \(\{I_t\}_t\) is a martingale process with respect to \(\{\F_t\}_t\), where \(\{\F_t\}_t\) is adapted to the underlying standard Brownian motion of \(\{I_t\}_t\).
+\end{theorem}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{corollary} \label{cor:334}
+\index{Ito integral!Expectation}
+With the same setup as \hyperref[thm:333]{Thm. 3.3.3}, we have
+\begin{enumerate}
+    \item \(E(I_t) = 0\) for all \(t\).
+    \item \(E\left(\int_s^t f_udW_u|\F_s\right) = 0\) for all \(0 \leq s < t\).
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+\begin{enumerate}
+    \item By the martingale property
+    \[
+    E(I_t) = E(I_t|\F_0) = I_0 = \int_0^0f_udW_u = 0.
+    \]
+    \item We have
+    \[
+    \begin{aligned}
+    &E\left(\int_s^t f_udW_u|\F_s\right) \\
+    = &E\left(\int_0^tf_udW_u|\F_s\right) - E\left(\int_0^s f_udW_u|\F_s\right) \\
+    = &E(I_t|\F_s) - I_s \\
+    = &I_s - I_s \text{ by part (1)} \\
+    = &0
+    \end{aligned}
+    \]
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Ito Isometry] \label{thm:335}
+\index{Ito isometry}
+Let \(\{I_t\}_t\) be the Ito integral with respect to a process \(\{f_t\}_t\), then
+\[
+E(I_t^2) = E\left(\int_0^t f_u^2 du\right) < \infty.
+\]
+\end{theorem}
+\begin{proof} The \(<\infty\) part is a consequence of the fact that \(\{f_t\}_t\) is square integrable. The proof of the first part, i.e.
+\[
+E\left(\left(\int_0^t f_udW_u\right)^2\right) = E\left(\int_0^t f_u^2du\right),
+\]
+is omitted.
+\end{proof}
+
+\begin{corollary} \label{cor:336}
+With the same setup as \hyperref[thm:335]{Thm. 3.3.5}, we have
+\begin{enumerate}
+    \item \(\var(I_t) = E(I_t^2) = E\left(\int_0^t f_u^2 du\right)\).
+    \item \(\var(I_t|\F_s) = E\left(\int_s^t f_u^2 du |\F_s\right)\) for \(0 \leq s < t\).
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+\begin{enumerate}
+    \item \[ 
+    \var(I_t) = E(I_t^2) - E(I_t)^2 = E\left(\int_0^t f_u^2 du\right) - 0^2 = E\left(\int_0^t f_u^2du\right)
+    \]
+    where the second step is by \hyperref[thm:335]{Thm. 3.3.5} and \hyperref[cor:334]{Corollary 3.3.4}.
+    \item \[
+    \begin{aligned}
+    &\var(I_t | \F_s) \\
+    = &\var\left(I_s + \int_s^t f_udW_u|\F_s\right) \\
+    = &E\left(\left(I_s + \int_s^t f_udW_u\right)^2|\F_s\right) - E\left(I_s + \int_s^t f_udW_u|\F_s\right)^2 \\
+    = &E(I_s^2|\F_s) + 2E\left(I_s\int_s^tf_udW_u|\F_s\right) + E\left(\left(\int_s^t f_udW_u\right)^2|\F_s\right) - E(I_t|\F_s)^2 \\
+    = &0 + 2(0) + E\left(\left(\int_s^t f_udW_u\right)^2|\F_s\right) \\
+    = &E\left(\int_s^t f_udW_u|\F_s\right)
+    \end{aligned}
+    \]
+    as required.
+\end{enumerate}
+\end{proof}
+
+\begin{definition} \label{def:337}
+\index{Ito process}
+\index{Drift}
+\index{Diffusion}
+\index{Ito process!Integral form}
+\index{Ito process!Differential form}
+Let \((\Omega, \{\F_t\}_t, \F, P)\) be a filtered probability space where \(\{\F_t\}_t\) is adapted to a standard Brownian motion \(\{W_t\}_t\), then a stochastic process \(\{X_t\}_t\) is an \textbf{Ito process} if \(X_t\) has the form
+\[
+dX_t = \alpha_tdt + \sigma_tdW_t
+\]
+where: \\
+\indent \(dX_t\), \(dt\), \(dW_t\) denote the infinitismal change of \(X_t\), time and \(W_t\) respectively, \\
+\indent \(\alpha_t\) is a process depending on \(t\) such that it is adapted to \(\{\F_t\}_t\) and
+\[
+E\left(\int_0^t|\alpha_u|du\right) < \infty,
+\]
+\indent \(\sigma_t\) is a stochastic process adaptd to \(\{\F_t\}_t\). \\
+\indent We may write the Ito process in \textbf{integral form}
+\[
+X_t - x_0 = \int_0^t\alpha_udu + \int_0^t \sigma_udW_u
+\]
+where \(x_0\) is a non-random constant. \\
+\indent We call \(\alpha_t\) the \textbf{drift}, and \(\sigma_t\) the \textbf{diffusion} or \textbf{volatility} of the Ito process. \\
+\indent We call
+\[
+dX_t = \alpha_tdt + \sigma_t dW_t
+\]
+to be the \textbf{differential form} of the Ito process.
+\end{definition}
+
+\begin{lemma} \label{lemma:338}
+Let \(\{X_t\}_t\) be an Ito process with
+\[
+dX_t = \alpha_tdt + \sigma_t dW_t,
+\]
+then
+\[
+(dX_t)^2 = \sigma_t^2 dt.
+\]
+\end{lemma}
+\begin{proof} We have
+\[
+(dX_t)^2 = \alpha_t^2(dt)^2 + 2\alpha_t\sigma^2dtdW_t + \sigma_t^2(dW_t)^2 = \alpha_t^2\cdot0 + 2\alpha_t\sigma^2\cdot0 + \sigma_t^2 dt
+\]
+by \hyperref[rmk:3218]{Remark 3.2.18}. Consequently
+\[
+(dX_t)^2 = \sigma_t^2dt.
+\]
+\end{proof}
+
+\begin{theorem}[Ito-Doeblin Lemma] \label{thm:339}
+\index{Ito-Doeblin Lemma}
+Let \(\{X_t\}_t\) be an Ito process defined on \((\Omega, \{\F_t\}_t, \F, P)\) with \(dX_t = \alpha_tdt + \sigma_tdW_t\) and
+\[
+f:[0, T]\times\bR\rightarrow\bR
+\]
+be a function such that
+\[
+f_t := \frac{\partial f}{\partial t}, f_x := \frac{\partial f}{\partial x}, f_{xx} := \frac{\partial f^2}{\partial x\partial x}
+\]
+are well-defined and continuous, then
+\[
+Y_t := f(t, X_t)
+\]
+is also an Ito process with drift equal to
+\[
+f_t(t, X_t) + f_x(t, X_t)\alpha_t + \frac12 f_{xx}(t, X_t)\sigma_t^2
+\]
+and diffusion
+\[
+f_x(t, X_t)\sigma_t.
+\]
+\indent In other words
+\[
+\begin{aligned}
+&dY_t = df(t, X_t) \\
+= &\left(f_t(t, X_t) + f_x(t, X_t)\alpha_t + \frac12 f_{xx}(t, X_t)\sigma_t^2\right)dt + f_x(t, X_t)dt\sigma_tdW_t \\
+= &f_t(t, X_t)dt + f_x(t, X_t)dX_t + \frac12 f_{xx}(t, X_t)(dX_t)^2 \text{ where } (dX_t)^2 = \sigma_t^2dt \text{ by \hyperref[lemma:338]{Lemma 3.3.8}}
+\end{aligned}
+\]
+\end{theorem}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{example} \label{eg:3310}
+Suppose we would like to compute
+\[
+\int_0^T W_tdW_t
+\]
+where \(\{W_t\}_t\) is a standard Brownian motion. \\
+\indent Using Ito-Doeblin's Lemma, take \(X_t = W_t\) and define
+\[
+\begin{aligned}
+f:[0, T] \times \bR &\rightarrow \bR \\
+(t, x) &\mapsto x^2
+\end{aligned}
+\]
+and \(Y_t = f(t, X_t) = X_t^2\). It follows that
+\[
+f_t(t, x) = 0, f_x(t, x) = 2x, f_{xx}(t, x) = 2.
+\]
+\indent By Ito-Doeblin's lemma, 
+\[
+dY_t = d(W_t)^2 = 0dt + 2W_tdW_t + \frac12(2)(1)dt
+\]
+since \(\sigma_t = 1\) (\(\{W_t\}_t\) is the standard Brownian motion). \\
+\indent Therefore
+\[
+\int_0^T d(W_t)^2 = \int_0^T 2W_tdW_t + \int_0^T dt
+\]
+and so
+\[
+\begin{aligned}
+& W_T^2 - W_0^2 = 2\int_0^T W_tdW_t + T \\
+\Leftrightarrow &W_T^2 - T = 2\int_0^T W_tdW_t \\
+\Leftrightarrow &\int_0^T W_tdW_t = \frac12(W_T^2 - T)
+\end{aligned}
+\]
+\end{example}
+
+%----------------------------------------------------------------------------------------
+
+\section{Arithmetic and Geometric Brownian Motion Models}
+
+\begin{definition} \label{def:341}
+\index{Brownian motion!Arithmetic}
+A stochastic process \(\{X_t\}_t\) satisfying the stochastic differential equation
+\[
+dX_t = \alpha dt + \sigma dW_t
+\]
+where \(\alpha, \sigma\) are constants, and \(\{W_t\}_t\) is a standard Brownian motion, is called an \textbf{arithmetic Brownian motion (ABM)}.
+\end{definition}
+
+\begin{proposition} \label{prop:342}
+Let \(\{X_t\}_t\) ba an ABM, then
+\begin{enumerate}
+    \item \(X_t = X_0 + \alpha t + \sigma W_t\).
+    \item \(E(X_t) = X_0 + \alpha t\).
+    \item \(\var(X_t) = \sigma^2t\).
+    \item \(X_t \sim N(X_0 + \alpha t, \sigma^2t)\).
+    \item For \(s \leq t\), \(E(X_t | \F_s) = X_s + \alpha(t - s)\).
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+    \item In differential form we have
+    \[
+    dX_t = \alpha dt + \sigma dW_t
+    \]
+    and integrating both sides yields
+    \[
+    \int_0^t X_udu = \int_0^t \alpha dt + \int_0^t\sigma dW_u
+    \]
+    where \(\int_0^t\sigma dW_u\) is an Ito integral. This yields
+    \[
+    X_t - X_0 = \alpha t + \sigma W_t
+    \]
+    as required.
+    \item \(E(W_t) = 0\) by \hyperref[prop:3212]{Proposition 3.2.12}(1).
+    \item \hyperref[prop:3212]{Proposition 3.2.12}(1) has \(\var(W_t) = t\).
+    \item We have \(W_t \sim N(0, t)\) by \hyperref[def:321]{Def. 3.2.1}. The rest follows.
+    \item \[
+    \begin{aligned}
+    E(X_t|\F_s) &= E\left(X_s + \int_s^t \alpha du + \int_s^t \sigma dW_u | \F_s\right) \\
+    &= E(X_s) + \alpha(t - s) + \sigma E(W_t - W_s|\F_s) \\
+    &= X_s + \alpha(t - s)
+    \end{aligned}
+    \]
+\end{enumerate}
+\end{proof}
+
+\begin{corollary} \label{cor:343}
+It an ABM \(\{X_t\}_t\) has drift 0, then \(\{X_t\}_t\) is a martingale.
+\end{corollary}
+\begin{proof}
+By \hyperref[prop:342]{Proposition 3.4.2}(5), we have
+\[
+E(X_t | \F_s) = X_s
+\]
+if the drift \(\alpha = 0\). By definition, \(\{X_t\}_t\) is a martingale.
+\end{proof}
+
+\begin{remark} \label{rmk:344}
+If we use ABM to model asset returns, we get
+\[
+\frac{dS_t}{S_t} = \mu dt + \sigma dW_t
+\]
+where \(S_t\) is the price of the asset at time \(t\). This motivates  the following definition.
+\end{remark}
+
+\begin{definition} \label{def:345}
+\index{Brownian motion!Geometric}
+Suppose \(\{S_t\}_t\) is a stochastic process that follows
+\[
+dS_t = \mu S_tdt + \sigma S_t dW_t
+\]
+where \(\{W_t\}_t\) is the standard Brownian motion, then \(\{S_t\}_t\) is said to follow a \textbf{geometric Brownian motion (GBM)}.
+\end{definition}
+
+\begin{theorem} \label{thm:346}
+Let \(\{S_t\}_t\) follow a geometric Brownian motion
+\[
+dS_t = \mu S_tdt + \sigma S_t dW_t,
+\]
+then the unique solution to this stochastic differential equation is
+\[
+S_t = S_0\exp\left(\left(\mu - \frac{\sigma^2}{2}\right)t + \sigma W_t\right),
+\]
+and furthermore for \(0 \leq t \leq T\),
+\[
+S_T = S_t\exp\left(\left(\mu - \frac{\sigma^2}{2}\right)(T - t) + \sigma(W_T - W_t)\right).
+\]
+\end{theorem}
+\begin{proof}
+Define function \(f(t, S_t) = \log(S_t)\) and \(X_t = S_t\), then
+\[
+f_t = 0, f_s = \frac1s, f_{ss} = -\frac{1}{s^2}.
+\]
+\indent By the Ito-Doeblin Lemma, we get
+\[
+\begin{aligned}
+d\log(S_t) &= f_tdt + f_sdS_t + \frac12 f_{ss}(dS_t)^2 \\
+&= \frac{1}{S_t}dS_t - \frac{1}{2S_t^2}(dS_t)^2 \\
+&= \frac1s(\mu S_tdt + \sigma S_tdW_t) - \frac{1}{2S_t^2}(\mu S_tdt + \sigma S_t dW_t)^2 \\
+&= \mu dt + \sigma dW_t - \frac{1}{2S_t^2}(\mu^2S_t^2(dt)^2 + 2\mu S_t^2\sigma dtdW_t + \sigma^2S_t^2(dW_t)^2) \\
+&= \mu dt + \sigma dW_t - \frac{1}{2S_t^2}(0 + 0 + \sigma^2S_t^2dt) \text{ by \hyperref[rmk:3218]{Remark 3.2.18}} \\
+&= \left(\mu - \frac{\sigma^2}{2}\right)dt + \sigma dW_t.
+\end{aligned}
+\]
+\indent Integrating both sides gives
+\[
+\int_0^t d\log(S_u) = \int_0^t\mu - \frac{\sigma^2}{2} du + \int_0^t \sigma dW_u
+\]
+and consequently
+\[
+\log(S_t) - \log(S_0) = \left(\mu - \frac{\sigma^2}{2}\right)t + \sigma W_t
+\]
+which gives
+\[
+S_t = S_0\exp\left(\left(\mu - \frac{\sigma^2}{2}\right)t + \sigma W_t\right), t \geq 0.
+\]
+\indent Integrating \(d\log(S_t)\) above from \(t\) to \(T\) gives
+\[
+\int_t^T d\log(S_u) = \int_t^T\mu - \frac{\sigma^2}{2} du + \int_t^T \sigma dW_u,
+\]
+and similar to before,
+\[
+\log(S_T) - \log(S_t) = \left(\mu - \frac{\sigma^2}{2}\right)(T - t) + \sigma(W_T - W_t)
+\]
+and
+\[
+S_T = S_t\exp\left(\left(\mu - \frac{\sigma^2}{2}\right)(T - t) + \sigma(W_T - W_t)\right), 0 \leq t \leq T,
+\]
+which completes the proof.
+\end{proof}
+
+\begin{definition} \label{def:347}
+\index{Log-normal distribution}
+If \(X\) is a random variable such that 
+\[
+\log(X) \sim N(\mu, \sigma^2)
+\]
+for some \(\mu, \sigma^2\), then \(X\) is said to follow a \textbf{log-normal distribution} of mean \(mu\) and standard deviation \(\sigma\). We write \(X \sim \logNDist(\mu, \sigma^2)\).
+\end{definition}
+
+\begin{proposition} \label{prop:348}
+If \(X \sim \logNDist(\mu, \sigma^2)\), then
+\[
+E(X) = e^{\mu + \frac12\sigma^2}
+\]
+and
+\[
+\var(X) = (e^{\sigma^2} - 1)e^{2\mu + \sigma^2}.
+\]
+\end{proposition}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{proposition} \label{prop:349}
+If \(\{S_t\}_t\) is a GBM with
+\[
+dS_t = \mu S_tdt + \sigma S_tdW_t,
+\]
+then for all \(t \geq 0\),
+\[
+E(S_t) = S_0e^{-\mu t}
+\]
+and for all \(0 \leq t \leq T\),
+\[
+E(S_T|\F_t) = S_te^{\mu(T - t)}.
+\]
+\end{proposition}
+\begin{proof}
+By \hyperref[thm:346]{Thm. 3.4.6}
+\[
+S_t = S_0e^{\left(\mu - \frac{\sigma^2}{2}\right)t + \sigma W_t}.
+\]
+\indent Let
+\[
+Z_t = \log(S_0) + \left(\mu - \frac{\sigma^2}{2}\right)t + \sigma W_t,
+\]
+then, since
+\[
+W_t \sim N(0, t),
+\]
+we have
+\[
+Z_t \sim N\left(\log(S_0) + \left(\mu - \frac{\sigma^2}{2}\right)t, \sigma^2t\right).
+\]
+\indent Note that by construction, \(S_t = e^{Z_t}\), so
+\[
+S_t \sim \logNDist\left(\log(S_0) + \left(\mu - \frac{\sigma^2}{2}\right)t, \sigma^2t\right),
+\]
+and by \hyperref[prop:348]{Proposition 3.4.8},
+\[
+E(S_t) = S_0e^{\mu t - \frac{\sigma^2}{2}t + \frac12\sigma^2t} = S_0e^{\mu t}
+\]
+as desired. \\
+\indent On the other hand, \hyperref[thm:346]{Thm. 3.4.6} also has that
+\[
+S_T = S_te^{\left(\mu - \frac{\sigma^2}{2}\right)(T - t) + \sigma (W_T - W_t)}.
+\]
+\indent Given \(\F_t\), \(t \leq T\), we have
+\[
+\log(S_T) = \log(S_t) + \left(\mu - \frac{\sigma^2}{2}\right)(T - t) + \sigma Z,
+\]
+where \(Z \sim N(0, T - t)\) by the property of Brownian motion. It follows that
+\[
+S_T|\F_t \sim \logNDist\left(\log(S_t) + \left(\mu - \frac{\sigma^2}{2}\right)(T - t), \sigma^2(T - t)\right).
+\]
+and subsequently
+\[
+E(S_T|\F_t) = S_te^{\mu(T - t) - \frac{\sigma^2}{2}(T - t) + \frac12\sigma^2(T - t)} = S_te^{\mu(T - t)}
+\]
+as desired.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 4
+%----------------------------------------------------------------------------------------
+
+\chapterimage{chapter_head_1.pdf} % Chapter heading image
+
+\chapter{Continuous-Time Financial Models}
+
+%----------------------------------------------------------------------------------------
+
+\section{The Black-Scholes Model}
+
+\begin{definition} \label{def:411}
+\index{Black-Scholes model}
+\index{Black-Scholes model!Physical probability measure}
+\index{Black-Scholes model!Valuation process}
+The \textbf{Black-Scholes model} has 2 assets, a risk-free asset with price process \(\{B_t\}_t\), a risky asset with price process \(\{S_t\}_t\) which does not pay dividend, from time \(t \in [0, T]\), in a filtered probability space \((\Omega, \{\F_t\}_t, \F, P)\), and a corresponding Brownian motion \(\{W_t^P\}_t\) with respect to \(P\), where \(P\), called the \textbf{physical probability measure}, is such that
+\[
+dB_t = rB_tdt
+\]
+for a fixed risk-free rate \(r\), and \(\{S_t\}_t\) follows a geometric Brownian motion
+\[
+dS_t = \alpha S_tdt + \sigma S_tdW_t^P
+\]
+for some constants \(\alpha\) and \(\sigma\). \\
+\indent A \textbf{trading strategy} is a process \(\{h_t\}_t\) where each \(h_t := (h_t^B, h_t^S)\) represents \(h_t^B\) units of the risk-free asset held in interval \([t, t + \Delta t)\) and \(h_t^S\) units of the risky asset held in interval \([t, t + \Delta t)\). Each \(h_t\) has \textbf{valuation}
+\[
+V_t^h = h_t^BB_t + h_t^SS_t.
+\]
+\indent The process \(\{V_t^h\}_t\) of trading strategy \(\{h_t\}_t\) is the \textbf{valuation process} of the trading strategy.
+\end{definition}
+
+\begin{definition} \label{def:412}
+\index{Black-Scholes model!Arbitrage opportunity}
+A trading strategy \(\{h_t\}_t\) in the Black-Scholes model is \textbf{self-financing} if
+\[
+dV_t^h = h_t^SdS_t + h_t^BdB_t,
+\]
+and it is an \textbf{arbitrage opportunity} if it is self-financing with \(V_0^h \leq 0\), \(P(V_T^h \geq 0) = 1\), and \(P(V_T^h > 0) > 0\). \\
+\indent The model is \textbf{arbitrage free} if there does not exist arbitrage opportunities.
+\end{definition}
+
+\begin{lemma} \label{lemma:413}
+Suppose a contingency claim in the Black-Scholes model has pricing process \(\{\Pi_t\}_t\) where each \(\Pi_t\) is a function of \(t\) and the risky asset price \(S_t\): \(\Pi_t = F(t, S_t)\), and that there exists a replicating portfolio \(\{h_t\}_t\) that is also self-financing, then we have
+\begin{enumerate}
+    \item 
+    \[
+    \alpha h_t^SS_t + rh_t^B B_t = \frac{\partial F}{\partial t} + \alpha S_t\frac{\partial F}{\partial S} + \frac12\frac{\partial^2F}{\partial S^2}\sigma^2S_t^2.
+    \]
+    \item
+    \[
+    \sigma h_t^SS_t = \frac{\partial F}{\partial S}\sigma S_t
+    \]
+    and consequently \(h_t^S = \frac{\partial F}{\partial S}\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Since \(\{h_t\}_t\) is self-financing, we have
+\[
+dV_t^h = h_t^SdS_t + h_t^BdB_t
+\]
+where \(dS_t = \alpha S_tdt + \sigma S_tdW_t^P\) and \(dB_t = rB_tdt\) by definition. Expand to get
+\[
+\begin{aligned}
+dV_t^h &= h_t^S(\alpha S_tdt + \sigma S_t dW_t^P) + h_t^BrB_tdt \\
+&= (\alpha h_t^SS_tdt + h_t^BrB_t)dt + \sigma S_th_t^SdW_t^P.
+\end{aligned}
+\]
+\indent On the other hand, \(\{S_t\}_t\) is an Ito process, so by the Ito-Doeblin Lemma, \(\{\Pi_t\}_t = \{F(t, S_t)\}_t\) is an Ito process with
+\[
+d\Pi_t = dF(t, S_t) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial S}dS_t + \frac12\frac{\partial^2 F}{\partial S^2}(dS_t)^2.
+\]
+\indent Substitute in \(dS_t = \alpha S_tdt + \sigma S_tdW_t^P\) to get
+\[
+d\Pi_t = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial S}(\alpha S_tdt + \sigma S_tdW_t^P) + \frac12\frac{\partial^2F}{\partial S^2}(\sigma^2S_t^2dt)
+\]
+where the last term above is a consequence of \hyperref[rmk:3218]{Remark 3.2.18}. Simplify this further to get
+\[
+d\Pi_t = \left(\frac{\partial F}{\partial t} + \alpha S_t\frac{\partial F}{\partial S} + \frac12\frac{\partial^2F}{\partial S^2}\sigma^2S_t^2\right)dt + \frac{\partial F}{\partial S}\sigma S_tdW_t^P.
+\]
+\indent Now, \(\{h_t\}_t\) replicates \(\{\Pi_t\}_t\), so \(dV_t^h = d\Pi_t\), and we equate their expanded forms to get
+\[
+\begin{aligned}
+&(\alpha h_t^SS_tdt + h_t^BrB_t)dt + \sigma S_th_t^SdW_t^P = dV_t^h \\
+= &d\Pi_t = \left(\frac{\partial F}{\partial t} + \alpha S_t\frac{\partial F}{\partial S} + \frac12\frac{\partial^2F}{\partial S^2}\sigma^2S_t^2\right)dt + \frac{\partial F}{\partial S}\sigma S_tdW_t^P.
+\end{aligned}
+\]
+\indent Equating drift yields
+\[
+\alpha h_t^SS_t + rh_t^BB_t = \frac{\partial F}{\partial t} + \alpha S_t\frac{\partial F}{\partial S} + \frac12\frac{\partial^2F}{\partial S^2}\sigma^2S_t^2
+\]
+which is equation 1, and equating diffusion yields
+\[
+\sigma S_th_t^S = \frac{\partial F}{\partial S}\sigma S_t,
+\]
+which is equation 2. This completes the proof.
+\end{proof}
+
+\begin{theorem}[The Black-Scholes Partial Differential Equation] \label{thm:414}
+\index{Black-Scholes model!Partial differential equation}
+Suppose a contingency claim in the Black-Scholes model has pricing process \(\{\Pi_t\}_t\) where each \(\Pi_t\) is a function of \(t\) and the risky asset price \(S_t\): \(\Pi_t = F(t, S_t)\), and that there exists a replicating portfolio \(\{h_t\}_t\) that is also self-financing, then we have
+\[
+\frac{\partial F}{\partial t} + rS\frac{\partial F}{\partial S} + \frac12\frac{\partial^2F}{\partial S^2}\sigma^2S^2 = rF
+\]
+where \(F(T, S_T) = \Pi_T\) is the payoff of the contingency at time \(T\).
+\end{theorem}
+\begin{proof}
+\hyperref[lemma:413]{Lemma 4.1.3}(1) gives \(h_t^S = \frac{\partial F}{\partial S}\), but via the definition of the valuation process we also have
+\[
+h_t^BB_t = V_t^h - h_t^SS_t.
+\]
+\indent Hence \(h_t^BB_t = V_t^h - \frac{\partial F}{\partial S}S_t\). Moreover, because \(\{h_t\}_t\) replicates \(\{\Pi_t\}_t\), we have
+\[
+h_t^BB_t = \Pi_t - \frac{\partial F}{\partial S} S_t = F(t, S_t) - \frac{\partial F}{\partial S}S_t.
+\]
+\indent Take \hyperref[lemma:413]{Lemma 4.1.3}(1) and substitute \(h_t^BB_t = \Pi_t - \frac{\partial F}{\partial S}S_t\) and \(h_t^S = \frac{\partial F}{\partial S}\) to get
+\[
+\alpha\frac{\partial F}{\partial S}S_t + rF - r\frac{\partial F}{\partial S}S_t = \frac{\partial F}{\partial t} + \alpha S_t\frac{\partial F}{\partial S} + \frac12\frac{\partial^2F}{\partial S^2}\sigma^2S_t^2.
+\]
+\indent This in turn yields
+\[
+rF = \frac{\partial F}{\partial t} + rS\frac{\partial F}{\partial S} + \frac12\frac{\partial^2F}{\partial S^2}\sigma^2S^2
+\]
+as required.
+\end{proof}
+
+\begin{corollary} \label{cor:415}
+In a replicating portfolio \(\{h_t\}_t\) of a contingency claim \(\{\Pi_t\}_t\) in a Black-Scholes model, we have
+\[
+h_t = (h_t^B, h_t^S) = \left(\frac{1}{B_t}\left(F - \frac{\partial F}{\partial S}S_t\right), \frac{\partial F}{\partial S}\right)
+\]
+where \(F(t, S_t) = \Pi_t\) for all \(t \in [0, T]\).
+\end{corollary}
+\begin{proof}
+This is in the proof of \hyperref[thm:414]{Thm. 4.1.4}.
+\end{proof}
+
+\begin{theorem}[Feynman-Kac Theorem] \label{thm:415}
+\index{Fernman-Kac Theorem}
+Consider the partial differential equation
+\[
+\frac{\partial}{\partial t}F(t, x) + \mu(t, x)\frac{\partial}{\partial t} F(t, x) + \frac12\sigma^2(t, x)\frac{\partial^2}{\partial x^2}F(t, x) = V(t, x)F(t, x) - f(t, x)
+\]
+defined for all \(x \in \bR\) and \(t \in [0, T]\) subject to the boundary condition
+\[
+F(T, x) = \Phi(x)
+\]
+where \(\mu, \sigma, \Phi, V, f\) are known functions, \(T \in \bR^+\) is known, and
+\[
+F:[0, T] \times \bR \rightarrow \bR
+\]
+is the unknown function, then the solution \(F^*\) can be written as the conditional expectation
+\[
+F^*(t, x) = E^P\left(\left.\int_t^T e^{-\int_t^rV(u, X_u)du}f(r, X_r)dr + e^{-\int_t^T V(u, X_u)du}\Phi(X_T)\right|X_t = x\right)
+\]
+under the probability measure \(P\) such that \(X\) is an Ito process driven by
+\[
+dX = \mu(X, t)dt + \sigma(t, X)dW_t^P
+\]
+where \(\{W_t^P\}\) is a Brownian motion under \(P\) and the initial condition \(X(t)\) is \(X(t) = x\).
+\end{theorem}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{corollary} \label{cor:417}
+If \(F\) is the solution to the partial differential equation
+\[
+\frac{\partial F}{\partial t}(t, x) + \mu(t, x)\frac{\partial F}{\partial x}(t, x) + \frac12\sigma^2(t, x)\frac{\partial^2}{\partial x^2}F(t, x) = rF(t, x)
+\]
+subjected to the boundary condition
+\[
+F(T, x) = \Phi(x)
+\]
+where \(\mu, \Phi, \sigma\) are known functions, \(r, T \in \bR^+\), and \(F:[0, T]\times\bR\rightarrow\bR\), then \(F\) has representation
+\[
+F(t, x) = e^{-r(T - t)}E^P(\Phi(X_T) | X_t = x)
+\]
+where \(X\) satisfies the partial differential equation
+\[
+dX_s = \mu(s, X_s)ds + \sigma(s, X_s)dW_s^P, X_t = x
+\]
+where \(\{W_s\}_s\) is a Brownian motion under \(P\).
+\end{corollary}
+\begin{proof}
+    Let \(f(t, x) = 0\) and \(V(t, x) = r\) in the Feynman-Kac Theorem, and we yield the result.
+\end{proof}
+
+\begin{corollary} \label{cor:418}
+The solution to the Black-Scholes PDE in \hyperref[thm:414]{Thm. 4.1.4} has the form
+\[
+\Pi_t = F(t, S_t) = e^{-r(T - t)}E^Q(\Phi(S_T)|\F_t)
+\]
+where \(S_t\) is the spot price at time \(t\) that follows the Ito process
+\[
+dS_t = rS_tdt + \sigma S_tdW_t^Q
+\]
+and \(\{\F_t\}_t\) is the filtration adapted to the Brownian motion \(\{W_t\}_t\) with respect to probability measure \(Q\).
+\end{corollary}
+\begin{proof}
+Define functions \(\mu(t, x) = rx\), \(\sigma(t, x) = \sigma x\), and fix \(S_t\) to be a price at a certain fixed time \(t\). Re-write the Black-Scholes PDE as
+\[
+\frac{\partial F}{\partial t}(t, S_t) + \mu(t, S_t)\frac{\partial F}{\partial S}(t, S_t) + \frac12\sigma^2(t, S_t)\frac{\partial^2}{\partial S^2}F(t, S_t) = rF(t, S_t)
+\]
+with boundary condition
+\[
+F(T, S_T) = \Pi_T = \Phi(S_T)
+\]
+and then apply \hyperref[cor:417]{Corollary 4.1.7} to get
+\[
+F(t, S_t) = e^{-r(T - t)}E^Q(\Phi(S_T) | S_t = S_t).
+\]
+\indent Note that the condition in the conditional expectation above is simply \(\F_t\), the information set at time \(t\), so
+\[
+F(t, S_t) = e^{-r(T - t)}E^Q(\Phi(S_T)|\F_t)
+\]
+as required, where
+\[
+dS_t = rS_tdt + \sigma S_tW_t^Q.
+\]
+\end{proof}
+
+\begin{theorem}[Solution to Black-Scholes PDE] \label{thm:419}
+\index{Black-Scholes model!Solution}
+Under the Black-Scholes model, the arbitrage-free price at time \(t\) of the derivative instrument \(\xi\) with maturity \(T\) and payoff \(\xi_T = \Phi(S_T)\) is given by
+\[
+\Pi_t = e^{-r(T - t)}\int_{-\infty}^\infty\Phi(e^y)f_{Y_T}(y)dy,
+\]
+where
+\[
+Y_T|\F_t \sim N\left(\log(S_t) + \left(r - \frac{\sigma^2}{2}\right)(T - t), \sigma^2(T - t)\right).
+\]
+\end{theorem}
+\begin{proof}
+From \hyperref[cor:418]{Corollary 4.1.8} we inferred the Ito process of the spot price \(\{S_t\}_t\) if \(F(t, S_t)\) is a solution to the Black-Scholes PDE. By \hyperref[def:345]{Def. 3.4.5}, \(\{S_t\}_t\) follows a geometric Brownian motion with drift \(rS_t\) and diffusion \(\sigma S_t\). By \hyperref[thm:346]{Thm. 3.4.6} we have
+\[
+S_T = S_te^{\left(r - \frac{\sigma^2}{2}\right)(T - t) + \sigma(W_T - W_t)}.
+\]
+\indent Write \(Y_T = \log(S_t) + \left(r - \frac{\sigma^2}{2}\right)(T - t) + \sigma(W_T - W_t)\) and consequently \(S_T = e^{Y_T}\). Moreover because \(W_T - W_t \sim N(0, T - t)\), we have
+\[
+Y_T | \F_t \sim N\left(\log(S_t) + \left(r - \frac{\sigma^2}{2}\right)(T - t), \sigma^2(T - t)\right).
+\]
+\indent For convenience, denote
+\[
+\tilde{\mu} = \log(S_t) + \left(r - \frac{\sigma^2}{2}\right)(T - t), \tilde{\sigma}^2 = \sigma^2(T - t).
+\]
+\indent It follows that
+\[
+S_T | \F_t \sim \logNDist(\tilde{\mu}, \tilde{\sigma}^2).
+\]
+\indent With the distribution of \(S_T | \F_t\) known, we can evaluate the expression in \hyperref[cor:418]{Corollary 4.1.8} to get
+\[
+\begin{aligned}
+\Pi_t &= e^{-r(T - t)}E^Q(\Phi(S_T)|\F_t) \\
+&= e^{-r(T - t)}E^Q(\Phi(e^{Y_T})|\F_t) \\
+&= e^{-r(T - t)}E^Q(\Phi(e^{Y_T})|S_t) \\
+&= e^{-r(T - t)}\int_{-\infty}^\infty\Phi(e^y)f_{Y_T}(y)dy
+\end{aligned}
+\]
+by the definition of expectation, \(f_{Y_T}(y)\) being the density function of \(Y_T\). This completes the proof.
+\end{proof}
+
+\begin{lemma} \label{lemma:4110}
+If \(X \sim \logNDist(\mu, \sigma^2)\), then for all \(K > 0\),
+\[
+E(X \mathbf{1}_{\{X > K\}}) = E(X)N\left(\frac{\mu + \sigma^2 - \log(K)}{\sigma}\right)
+\]
+where \(N(\cdot)\) is the distribution function of the standard normal distribution.
+\end{lemma}
+\begin{proof}
+Write \(X = e^Y\) where \(Y \sim N(\mu, \sigma^2)\). We have
+\[
+f_Y(y) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac12\left(\frac{y - \mu}{\sigma}\right)^2}, y \in \bR,
+\]
+to be the density function of \(Y\). It follows that
+\[
+E(X\mathbf{1}_{\{X > K\}}) = E(e^Y\mathbf{1}_{\{Y > \log(K)\}}) = \int_{\log(K)}^\infty e^y\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac12\left(\frac{y - \mu}{\sigma}\right)^2}dy.
+\]
+\indent Let \(z = \frac{y - \mu}{\sigma}\). It follows that \(dz = \frac1\sigma dy\) and \(y = \sigma z + \mu\). Re-write the above to be
+\[
+\begin{aligned}
+E(X\mathbf{1}_{\{X > K\}}) &= \int_{\frac{\log(K) - \mu}{\sigma}}^\infty e^{\mu + \sigma z}\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac12 z^2}\sigma dz \\
+&= e^\mu\int_{\frac{\log(K) - \mu}{\sigma}}^\infty \frac{1}{\sqrt{2\pi}}e^{\frac{2\sigma z - z^2}{2}} dz \\
+&= e^\mu\int_{\frac{\log(K) - \mu}{\sigma}}^\infty \frac{1}{\sqrt{2\pi}}e^{\frac{\sigma^2 - (z - \sigma)^2}{2}} dz \\
+&= e^{\mu + \frac{\sigma^2}{2}} \int_{\frac{\log(K) - \mu}{\sigma}}^\infty \frac{1}{\sqrt{2\pi}}e^{-\frac{(z - \sigma)^2}{2}} dz.
+\end{aligned}
+\]
+\indent Let \(u = z - \sigma\), and thus \(du = dz\), \(z = u + \sigma\), we get
+\[
+E(X \mathbf{1}_{\{X > K\}}) = e^{\mu + \frac{\sigma^2}{2}}\int_{\frac{\log(K) - \mu}{\sigma} - \sigma}^\infty \frac{1}{\sqrt{2\pi}}e^{-\frac{u^2}{2}}du.
+\]
+\indent Note that \(\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{u^2}{2}\right)\) is the density function of \(N(0, 1)\), so
+\[
+\begin{aligned}
+E(X\mathbf{1}_{\{X > K\}}) &= e^{\mu + \frac{\sigma^2}{2}}\left(1 - N\left(\frac{\log(K) - \mu}{\sigma} - \sigma\right)\right) \\
+&= e^{\mu + \frac{\sigma^2}{2}}N\left(\sigma - \frac{\log(K) - \mu}{\sigma}\right) \\
+&= e^{\mu + \frac{\sigma^2}{2}}N\left(\frac{\mu + \sigma^2 - \log(K)}{\sigma}\right)
+\end{aligned}
+\]
+as required.
+\end{proof}
+
+\begin{lemma} \label{lemma:4111}
+If \(X \sim \logNDist(\mu, \sigma^2)\), then for all \(K > 0\),
+\[
+E(X\mathbf{1}_{\{X < K\}}) = E(X)N\left(\frac{\log(K) - \mu - \sigma^2}{\sigma}\right)
+\]
+where \(N(\cdot)\) is the distribution function of the standard normal distribution.
+\end{lemma}
+\begin{proof} 
+To be completed.
+\end{proof}
+
+\begin{lemma} \label{lemma:4112}
+If \(X \sim \logNDist(\mu, \sigma^2)\), then for all \(K > 0\),
+\begin{enumerate}
+\item 
+\[
+E(K\mathbf{1}_{\{X > K\}}) = KN\left(\frac{\mu - \log(K)}{\sigma}\right)
+\]
+\item
+\[
+E(K\mathbf{1}_{\{X < K\}}) = KN\left(\frac{\log(K) - \mu}{\sigma}\right)
+\]
+\end{enumerate}
+where \(N(\cdot)\) is the distribution function of the standard normal distribution.
+\end{lemma}
+\begin{proof} 
+To be completed.
+\end{proof}
+
+\begin{theorem} \label{thm:4113}
+\index{Black-Scholes model!Call option price}
+In the Black-Scholes model, the price of a European call option with strike \(K\) and maturity \(T\) at time \(t\) when spot is \(S_t\) is
+\[
+c(t, S_t, K, T) = S_tN(d_1(t, S_t)) - e^{-r(T - t)}KN(d_2(t, S_t))
+\]
+where \(N(\cdot)\) is the distribution function of the standard normal distribution, \(r\) is the risk-free rate, and
+\[
+\begin{aligned}
+d_1(t, S_t) &= \frac{\log\left(\frac{S_t}{K}\right) + \left(r + \frac{\sigma^2}{2}\right)(T - t)}{\sigma\sqrt{T - t}}, \\
+d_2(t, S_t) &= d_1(t, S_t) - \sigma\sqrt{T - t}.
+\end{aligned}
+\]
+\end{theorem}
+\begin{proof}
+To be completed.
+\end{proof}
+
+\begin{corollary} \label{cor:4114}
+\index{Black-Scholes model!Put option price}
+In the Black-Scholes model, the price of a European put option with strike \(K\) and maturity \(T\) at time \(t\) when spot is \(S_t\) is
+\[
+p(t, S_t, K, T) = e^{-r(T - t)}KN(-d_2(t, S_t)) - S_tN(-d_1(t, S_t))
+\]
+where \(N(\cdot)\) is the distribution function of the standard normal distribution, \(r\) is the risk-free rate, and
+\[
+\begin{aligned}
+d_1(t, S_t) &= \frac{\log\left(\frac{S_t}{K}\right) + \left(r + \frac{\sigma^2}{2}\right)(T - t)}{\sigma\sqrt{T - t}}, \\
+d_2(t, S_t) &= d_1(t, S_t) - \sigma\sqrt{T - t}.
+\end{aligned}
+\]
+\end{corollary}
+\begin{proof}
+To be completed.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+
+\section{Risk-Neutral Pricing and Girsanov Theorem}
+
+\begin{proposition} \label{prop:421}
+Suppose the risky asset in the Black-Scholes model \(\{S_t\}_t\) satisfies
+\[
+dS_t = rS_tdt + \sigma S_tdW_t^Q
+\]
+where \(Q\) is the probability measure in the solution of the Black-Scholes PDE in \hyperref[cor:418]{Corollary 4.1.8}, then the series
+\[
+\{S_te^{-rt}, t \geq 0\}
+\]
+is a martingale under \(Q\).
+\end{proposition}
+\begin{proof}
+Define \(Y_t = f(t, S_t) = e^{-rt}S_t\) where \(f(t, x) \mapsto e^{-rt}x\) is a function, then
+\[
+f_t(x) = \frac{\partial f}{\partial t}(x) = -re^{-rt}x, f_x(t) = \frac{\partial f}{\partial x}(t) = e^{-rt}, f_{xx}(t) = \frac{\partial^2 f}{\partial x^2}(t) = 0.
+\]
+\indent Since \(\{S_t\}_t\) is an Ito process (\hyperref[cor:418]{Corollary 4.1.8}), we have, by the \hyperref[thm:339]{Ito-Doeblin Lemma},
+\[
+\begin{aligned}
+dY_t &= -re^{-rt}xdt + e^{-rt}dS_t + \frac12(0) \\
+&= -re^{-rt}xdt + e^{-rt}dS_t \\
+&= -re^{-rt}xdt + e^{-rt}(rS_tdt + \sigma S_tdW_t^Q) \\
+&= \sigma S_te^{-rt}dW_t^Q
+\end{aligned}
+\]
+to be an Ito process as well. Put \(\{g_t\}_t\) to be
+\[
+g_t = \sigma S_te^{-rt}
+\]
+we note that
+\[
+E\left(\int_0^t g_u^2du\right) = E\left(\int_0^t\sigma^2S_u^2e^{-2ru}du\right) < \infty,
+\]
+so \(\{Y_t\}_t\) is a well-defined Ito process. \\
+\indent By \hyperref[thm:333]{Theorem 3.3.3}, \(\{Y_t\}_t\) is a martingale with respect to \(\{\F_t\}_t\), which is adapted to (generated by, in fact) the Brownian motion \(\{W_t^Q\}_t\). This completes the proof.
+\end{proof}
+
+\begin{proposition} \label{prop:422}
+If \(\{V_t\}_t\) is the value process of a self-financing portfolio, then the discounted portfolio values
+\[
+\{e^{-rt}V_t, t \geq 0\}
+\]
+is a martingale under \(Q\), the probability measure in the solution to to the Black-Scholes PDE.
+\end{proposition}
+\begin{proof}
+Because \(\{V_t\}_t\) is self-financing, we have
+\[
+dV_t = h_t^BdB_t + h_t^SdS_t
+\]
+where \(dB_t = re^{rt}dt\). \\
+\indent Let \(Y_t = e^{-rt}V_t\) and define function \(f:(t, x) \mapsto e^{-rt}x\) and get \(f_t\), \(f_x\), and \(f_{xx}\) in similar fashion to \hyperref[prop:421]{Proposition 4.2.1}. By the Ito-Doeblin Lemma, we get
+\[
+dY_t = -re^{-rt}V_tdt + e^{-rt}dV_t
+\]
+where \(V_t = h_t^BB_t + h_t^SS_t\). Substitute this and \(dV_t\) in yields
+\[
+\begin{aligned}
+dY_t &= -re^{-rt}(h_t^BB_t + h_t^SS_t)dt + e^{-rt}(h_t^BdB_t + h_t^SdS_t) \\
+&= -re^{-rt}(h_t^BB_t + h_t^SS_t)dt + e^{-rt}(h_t^Bre^{rt}dt + h_t^SdS_t) \\
+&= -re^{-rt}h_t^SS_tdt + e^{-rt}h_t^SdS_t \\
+&= -re^{-rt}h_t^SS_tdt + e^{-rt}h_t^S(rS_tdt + \sigma S_tdW_t^Q) \\
+&= h_t^Se^{-rt}\sigma S_tdW_t^Q
+\end{aligned}
+\]
+which is, using similar reasoning as \hyperref[prop:421]{Proposition 4.2.1}, an Ito process and consequently a martingale with respect to \(Q\).
+\end{proof}
+
+\begin{definition} \label{def:423}
+\index{Attainable}
+\index{Complete market}
+In a continuous-time financial model, a contingent claim with payoff \(\Phi(S_T)\) at time \(T\) is \textbf{attainable} if there exists a self-financing portfolio strategy \(\{h_t\}_{t \geq 0} = \{(h_t^B, h_t^S): t \geq 0\}\) with valuation process
+\[
+V_t = h_t^BB_t + h_t^SS_t
+\]
+such that \(S_T = \Phi(S_T)\). \\
+\indent If all contingency claims are attainable, the market is said to be \textbf{complete}.
+\end{definition}
+
+\begin{remark} \label{rmk:424}
+Note that we already used the content of \hyperref[def:423]{Def. 4.2.3} in the statement of \hyperref[lemma:413]{Lemma 4.1.3}.
+\end{remark}
+
+\begin{definition} \label{def:425}
+\label{Martingale measure}
+In a model with a riskless asset and a risky asset, a \textbf{martingale measure} is a probability measure under which the discounted expectation of the risky asset price is equal to the current risky asset price.
+\end{definition}
+
+\begin{theorem}[First Fundamental Theorem of Asset Pricing] \label{thm:426}
+\index{Fundamental theorem of asset pricing!First}
+A market model in continuous-time is arbitrage-free if and only if there exists a martingale measure.
+\end{theorem}
+\begin{proof}
+We omit the proof.
+\end{proof}
+
+\begin{theorem}[Second Fundamental Theorem of Asset Pricing] \label{thm:427}
+\index{Fundamental theorem of asset pricing!Second}
+A continuous-time arbitrage-free market model is complete if and only if the martingale measure is complete (in a measure space \((X, \B, \mu)\), \(\mu\) is a complete measure if for all \(E \in \B\) such that \(\mu(E) = 0\), and \(F \subset E\), then \(F \in \B\)).
+\end{theorem}
+\begin{proof}
+We omit the proof.
+\end{proof}
+
+\begin{theorem}[Risk-Neutral Valuation] \label{thm:428}
+\index{Risk-neutral valuation}
+Suppose we have riskless asset with price process \(\{B_t\}_t\) and a risk asset with price process \(\{S_t\}_t\), such that
+\[
+\begin{aligned}
+dS_t &= \alpha(t, S_t)dt + \sigma S_tdW_t \\
+dB_t &= r_tB_tdt, B_0 = 1
+\end{aligned}
+\]
+in an arbitrage-free model with martingale measure \(Q\), then the price of an attainable contingency claim at time \(t\) is given by
+\[
+F(t, S_t) = E^Q\left(\left.\Phi(S_T)\frac{B_t}{B_T}\right|\F_t\right).
+\]
+\end{theorem}
+\begin{proof}
+Since the contingency claim is attainable, let \(\{V_t\}_t\) be the valuation process of the replicating portfolio. Because the model is arbitrage-free, we have
+\[
+V_t = F(t, S_t)
+\]
+for all \(t \in [0, T]\). \\
+\indent Because \(Q\) is a martingale measure, the process
+\[
+\left\{Z_t = \frac{S_t}{B_t}: t \in [0, T]\right\}
+\]
+is a martingale, and in particular
+\[
+E(Z_t | \F_s) = E\left(\left.\frac{S_t}{B_t}\right|\F_s\right) = \frac{S_s}{B_s} = Z_s = \frac{1}{B_t}E(S_t|\F_s).
+\]
+\indent Re-write \(\{Z_t\}_t\) in its differential form
+\[
+dZ_t = g_tdW_t^Q
+\]
+for some function \(g_t\). \\
+\indent Define a function \(f: (t, x) \mapsto \frac{x}{B_t}\) and we get
+\[
+\begin{aligned}
+f_t(x) &= \frac{\partial f}{\partial t}(t, x) = \left(-\frac{x}{B_t^2}\right)\frac{\partial}{\partial t}B_t = \left(\frac{-x}{B_t^2}\right)r_tB_t \\
+f_x(t) &= \frac{\partial f}{\partial x}(t, x) = \frac{1}{B_t} \\
+f_{xx}(t) &= \frac{\partial^2 f}{\partial x^2}(t, x) = 0.
+\end{aligned}
+\]
+\indent Applying the Ito-Doeblin lemma, we have
+\[
+dZ_t = \frac{-1}{B_t}S_tr_tB_tdt + \frac{1}{B_t}dS_t = \frac{-r_t}{B_t}S_tdt + \frac{1}{B_t}dS_t.
+\]
+\indent On the other hand, if we consider \(Y_t := V_t / B_t\) for \(t\geq0\), using the same \(f\), we apply the Ito-Doeblin Lemma again to get
+\[
+\begin{aligned}
+dY_t &= f_t(t, Y_t)dt + f_x(t, V_t)dV_t \\
+&= \frac{-V_t}{B_t^2}r_tB_tdt + \frac{1}{B_t}dV_t \\
+&= -\frac{r_t}{B_t}(h_t^BB_t + h_t^SS_t)dt + \frac{1}{B_t}(h_t^SdS_t + h_t^BdB_t) \\
+&= -\frac{r_t}{B_t}h_t^SS_tdt + \frac{1}{B_t}h_t^SdS_t - r_th_t^Bdt + \frac{1}{B_t}h_t^B(r_tB_tdt) \\
+&= \frac{-r_t}{B_t}h_t^SS_tdt + \frac{1}{B_t}h_t^SdS_t \\
+&= h_t^S\left(\frac{-r_t}{B_t}S_tdt + \frac{1}{B_t}dS_t\right) \\
+&= h_t^SdZ_t \text{ by the previous identity} \\
+&= h_t^Sg_tdW_t^Q.
+\end{aligned}
+\]
+\indent Hence \(\{Y_t\}_t\) is a martingale under \(Q\), and by the martingale property (\hyperref[def:314]{Def. 3.1.4}(3), we have
+\[
+E(Y_t | \F_s) = Y_s \FORALL s \leq t
+\]
+and in particular \(Y_t = E(Y_T|\F_t)\) for any \(t \in [0, T]\). Thus
+\[
+\frac{V_t}{B_t} = E(Y_T|\F_t) = \frac{F(t, S_t)}{B_t} \Rightarrow F(t, S_t) = B_tE(Y_T|\F_t).
+\]
+\indent Now \(Y_T = \frac{1}{B_T}\Phi(S_T)\) because \(V_T = \Phi(S_T)\), so substitution yields
+\[
+F(t, S_t) = B_tE\left(\left.\frac{\Phi(S_T)}{B_T}\right|\F_t\right) = E\left(\left.\Phi(S_T)\frac{B_t}{B_T}\right|\F_t\right)
+\]
+as required.
+\end{proof}
+
+\begin{theorem}[Girsanov's Theorem] \label{thm:429}
+\index{Girsanov's Theorem}
+Let \(\{W_t\}_t\) be a standard Brownian motion on the filtered probability space \((\Omega, \{\F_t\}_t, \F, P)\) and \(\{\Psi_t\}_t\) be a stochastic process such that
+\[
+E^P\left(e^{\frac12\int_0^T \Psi_t^2dt}\right) < \infty
+\]
+for some fixed \(T > 0\). Define a process \(\{L_t\}_t\) on \(t \in [0, T]\) where
+\[
+L_0 = 1, L_t = e^{\int_0^t\Phi_sdW_s^P - \frac12\int_0^t\Phi_s^2ds},
+\]
+i.e. \(dL_t = \Phi_tL_tdW_t^P\), then there exists a probability measure \(Q\) on \(\Omega\) such that
+\[
+L_T = \frac{dQ}{dP}
+\]
+and
+\[
+dW_t^P = \Phi_tdt + dW_t^Q,
+\]
+where \(\frac{dQ}{dP}\) is the Radon-Nikodym derivative between measures \(Q\) and \(P\) and \(\{W_t^Q\}_t\) is the Brownian motion under \(Q\).
+\end{theorem}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{remark} \label{rmk;4210}
+Since \(dL_t = \Psi_tL_tdW_t^P\) is a Brownian motion with no drift, it is a martingale with respect to \(P\), and
+\[
+L_t = E^P\left(\left.\frac{dQ}{dP}\right|\F_t\right).
+\]
+\indent We sometimes write the process as
+\[
+L_t = \left(\frac{dQ}{dP}\right)_t
+\]
+i.e. the Radon-Nikodym derivative is a random variable.
+\end{remark}
+
+\begin{corollary} \label{cor:4211}
+Consider a Black-Scholes model with price processes \(dB_t = rB_tdt\) and \(dS_t = \mu S_tdt + \sigma S_tdW_t^P\) for the riskless and the risky assets respectively over a filtered probability space \((\Omega, (\F_t)_t, \F, P)\), then there exists a probability measure \(Q\) such that the Brownian motion with respect to \(Q\) satisfies
+\[
+dW_t^Q = dW_t^P - \frac{r - \mu}{\sigma}.
+\]
+\end{corollary}
+\begin{proof}
+By \hyperref[cor:418]{Corollary 4.1.8}, the solution to the Black-Scholes PDE has the spot price following the process
+\[
+dS_t = rS_tdt + \sigma S_tdW_t^Q
+\]
+where \(Q\) is a result of the \hyperref[thm；416]{Feynman-Kac Theorem}. \\
+\indent Define the process \((\Psi_t)_t\) such that \(\Psi_t = \frac{r - \mu}{\sigma}\) for all \(t > 0\). Note that
+\[
+E^P\left(e^{\frac12\int_0^T\frac{(r - \mu)^2}{\sigma^2}dt}\right) = E^P\left(e^{\frac12T(t - \mu)^2/\sigma^2}\right) < \infty
+\]
+as long as \(\sigma > 0\), which is true in any risky asset prices, so by \hyperref[thm:429]{Girsanov's Theorem}, there exists a probability measure \(Q\) such that
+\[
+\frac{dQ}{dP} = e^{\int_0^t\frac{r - \mu}{\sigma}dW_s^P - \frac12\int_0^t\frac{(r - \mu)^2}{\sigma^2}ds}
+\]
+and \(dW_t^P = \frac{r - \mu}{\sigma}dt + dW_t^Q\), as required.
+\end{proof}
+
+\begin{corollary} \label{cor:4212}
+\index{Black-Scholes model!Arbitrage-free}
+The Black-Scholes model is arbitrage-free.
+\end{corollary}
+\begin{proof} Direct consequence of \hyperref[cor:4211]{Corollary 4.2.11}, \hyperref[prop:421]{Proposition 4.2.1}, and \hyperref[thm:426]{the First Fundamental Theorem of Asset Pricing}.
+\end{proof}
+
+\begin{theorem} \label{thm:4213}
+The Black-Scholes model is complete.
+\end{theorem}
+\begin{proof} We omit the proof. \end{proof}
+
+\begin{proposition} \label{prop:4214}
+Let \(P\) be the physical probability measure in the Black-Scholes model, \(Q\) be the risk-neutral probability obtained in \hyperref[cor:4211]{Corollary 4.2.11}, then the expectation of \(S_T\) given \(S_0\) and riskless rate \(r\) under \(Q\) is
+\[
+E^Q(S_T) = S_0e^{rT}.
+\]
+\end{proposition}
+\begin{proof}
+From the proof of \hyperref[cor:4211]{Corollary 4.2.11}, we let \((\Psi_t)_t\) be
+\[
+\Psi_t = \frac{r - \mu}{\sigma}.
+\]
+\indent From the statement of Girsanov's Theorem, we define \((L_t)_t = (dQ/dP)_t\), where
+\[
+\left(\frac{dQ}{dP}\right)_T = L_T = \exp\left(\int_0^T\Psi_sdW_s^P - \frac12\int_0^T\Psi_s^2ds\right).
+\]
+\indent Now 
+\[
+E^Q(S_T) = E^P\left(\left(\frac{dQ}{dP}\right)_TS_T\right)
+\]
+where \(E^P(S_T) = S_0e^{\mu T}\) since \(dS_t\) follows a geometric Brownian motion and we invoke \hyperref[thm:346]{Thm. 3.4.6} to get
+\[
+\begin{aligned}
+E^P(S_T) &= E^P\left(S_0e^{\left(\mu - \frac{\sigma^2}{2}\right)T + \sigma(W_T - W_t)}\right) \\
+&= S_0e^{\left(\mu - \frac{\sigma^2}{2}\right)T}E^P(e^{\sigma(W_T - W_t)})
+\end{aligned}
+\]
+where \(W_T - W_0 \sim N(0, T)\) and the result follows from the moment-generating function of the normal distribution. \\
+\indent Substitute in \(L_T\) to get
+\[
+\begin{aligned}
+E^Q(S_T) &= E^P\left(\left(\frac{dQ}{dP}\right)_TS_T\right) \\
+&= E^P\left(\exp\left(\int_0^T\frac{r - \mu}{\sigma}dW_s^P - \frac12\int_0^T\left(\frac{r - \mu}{\sigma}\right)^2ds\right)\cdot S_T\right) \\
+&= E^P\left(\exp\left(\frac{r - \mu}{\sigma}W_T^P - \frac12\left(\frac{r - \mu}{\sigma}\right)^2T\right) \cdot S_0\exp\left(\left(\mu - \frac{\sigma^2}{2}\right)T + \sigma W_T^P\right)\right) \\
+&= e^{-\frac12\left(\frac{r - \mu}{\sigma}\right)^2T} \cdot S_0e^{\left(\mu - \frac{\sigma^2}{2}\right)T}E^P(e^{\left(\frac{r - \mu}{\sigma} + \sigma\right)W_T^P}) \\
+&= e^{-\frac12\left(\frac{r - \mu}{\sigma}\right)^2T}S_0e^{\left(\mu - \frac{\sigma^2}{2}\right)T}\cdot e^{\frac12T\left(\frac{r - \mu}{\sigma} + \sigma\right)^2} \text{ by moment-generating function of } N(0, T) \\
+&= S_0e^{rT}
+\end{aligned}
+\]
+as required.
+\end{proof}
+
+\begin{example} \label{eg:4215}
+Consider a continuous-time model and a forward contract with forward price \(K\) on an asset which has price process \((S_t)_{t=0}^T\). \\
+\indent The payoff at time \(T\) is \(S_T - K\) and by definition of a forward, the value of the forward at time 0 is 0. Suppose the riskless asset has price \(B_T\) at time \(T\), then a risk-neutral measure \(Q\) must satisfy, by \hyperref[thm:428]{Thm. 4.2.8}, 
+\[
+0 = E^Q\left(S_T - \frac{K}{B_T}\right).
+\]
+\indent Now \(\frac{S}{B}\) is a martingale under \(Q\) by the proof of \hyperref[thm:428]{Thm. 4.2.8}, thus
+\[
+0 = E^Q\left(S_T - \frac{K}{B_T}\right) = S_0 - \frac{K}{B_T}
+\]
+and so \(K = S_0B_T\). \\
+\indent If there is a riskless rate \(r\) such that \(B_t = e^{rt}\), then \(K = S_0e^{rt}\), which is the same result as \hyperref[prop:154]{Proposition 1.5.4}. \\
+\indent On the other hand, the value of the contract itself is given by
+\[
+\begin{aligned}
+f_{t, T} &= E^Q\left((S_T - K)\left.\frac{B_t}{B_T}\right|\F_t\right) \\
+&= B_tE^Q\left(\left.\frac{S_T}{B_T}\right|\F_t\right) - E^Q\left(K\frac{B_t}{B_T}\right) \\
+&= B_t\frac{S_t}{B_t} - S_0B_T\frac{B_t}{B_T} \text{ by martingale property} \\
+&= S_t - S_0B_t
+\end{aligned}
+\]
+at time \(t \in [0, T]\).
+\end{example}
+
+%----------------------------------------------------------------------------------------
+
+\section{Monte-Carlo Method for Pricing}
+
+%----------------------------------------------------------------------------------------
+
+\section{Implies Volatility}
+
+%----------------------------------------------------------------------------------------
+
+\section{The Greeks}
+
+%----------------------------------------------------------------------------------------
+
+\section{Hedging}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 5
+%----------------------------------------------------------------------------------------
+
+\chapterimage{chapter_head_1.pdf} % Chapter heading image
+
+\chapter{Continuous-Time Interest Rate Models}
+
+%----------------------------------------------------------------------------------------
+
+\section{Bonds and Interest Rates}
+\begin{definition} \label{def:511}
+\index{T-bond}
+A zero-coupon bond with maturity \(T\) is called a \textbf{\(T\)-bond}. The price of the \(T\)-bond at time \(t\) is denoted \(p(t, T)\), \(0 \leq t \leq T\). We assume \(p(t, T)\) is a differentiable function with respect to \(t\).
+\end{definition}
+
+\begin{definition} \label{def:512}
+\index{Short rate}
+The \textbf{short rate} at time \(t \in [0, T]\), denoted \(r(t)\), is a random variable which represents the continuously compounded interest rate at which one can borrow or lend for an infinitesimal amount of time \(\Delta t\) at time \(t\).
+\end{definition}
+
+\begin{definition} \label{def:513}
+\index{LIBOR forward rate}
+At time \(t \in [0, T]\), the \textbf{\([S, T]\) LIBOR forward rate} for some \(S \in [t, T]\), denoted \(L(t; S, T)\), is the simple interest on \$1 invested at time \(S\) till time \(T\).
+\end{definition}
+
+\begin{proposition} \label{proposition:514}
+Suppose \(0 \leq t \leq S \leq T\), then the LIBOR forward rate is
+\[
+L(t; S, T) = -\frac{p(t, T) - p(t, S)}{(T - S)p(t, T)}
+\]
+and in particular
+\[
+L(S; S, T) = -\frac{p(t, T) - 1}{(T - S)p(t, T)}.
+\]
+\end{proposition}
+\begin{proof}
+By the definition of \(L(t; S, T)\) we have the payoff of \$1, invested at time \(S\) to be
+\[
+1 + (T - S)L(t; S, T)
+\]
+at time \(T\). On the other hand, we can pay \(p(t, S)\) at time \(t\) to enter into a \(T\)-bond. This yields \$1 at time \(S\), and becomes \(p(t, S) / p(t, T)\) at time \(T\). Thus we have the equation
+\[
+1 + (T - S)L(t; S, T) = \frac{p(t, S)}{p(t, T)}
+\]
+and equivalently
+\[
+L(t; S, T) = \frac{\frac{p(t, S)}{p(t, T)} - 1}{T - S} = -\frac{p(t, T) - p(t, S)}{(T - S)p(t, T)}.
+\]
+\indent For the second result, simply substitute in \(p(S, S) = 1\) and get
+\[
+L(S; S, T) = -\frac{p(t, T) - 1}{(T - S)p(t, T)}.
+\]
+\end{proof}
+
+\begin{definition} \label{def:515}
+\index{Simple spot rate}
+\index{LIBOR spot rate}
+The \textbf{simple spot rate} or the \textbf{LIBOR spot rate} for \([S, T]\) is the \(L(S; S, T)\) in \hyperref[prop:514]{Proposition 5.1.4} above.
+\end{definition}
+
+\begin{definition} \label{prop:516}
+\index{Continuously compounded forward rate}
+\index{Continuously compounded spot rate}
+\index{Zero-coupon yield}
+At time \(t \in [0, T]\), the \textbf{continuously compounded forward rate for \([S, T]\) contracted at \(t \leq S\)} is the interest on \$1 invested at \(S\) till time \(T\), assuming that interest is continuously compounded, denoted \(R(t; S, T)\). \\
+\indent The \textbf{continuously compounded spot rate}, or the \textbf{zero-coupon yield}, is \(R(S; S, T)\), or denoted \(R(S, T)\).
+\end{definition}
+
+\begin{proposition} \label{prop:517}
+We have
+\[
+R(t; S, T) = -\frac{\log(p(t, T)) - \log(p(t, S))}{T - S}
+\]
+and
+\[
+R(S; S, T) = R(S, T) = -\frac{\log(p(t, T))}{T - S}.
+\]
+\end{proposition}
+\begin{proof}
+Consider two strategies at time \(t\). The first strategy enters a contract that invests \$1 at time \(S\). By definition, the \$1 will grow at rate \(R(t; S, T)\) for the period of \(T - S\). The second strategy invests \(p(t, S)\) at time \(t\) to enter a \(T\)-bond. This yields \$1 at time \(S\), and becomes \(p(t, S) / p(t, T)\) at time \(T\). This these two strategies both effectively have investment of \$1 at time \(S\), their payoff at time \(T\) are equal:
+\[
+e^{R(t; S, T)(T - S)} = \frac{p(t, S)}{p(t, T)}.
+\]
+\indent It follows that
+\[
+\begin{aligned}
+R(t; S, T) &= \frac{1}{T - S}\log\left(\frac{p(t, S)}{p(t, T)}\right) \\
+&= \frac{1}{T - S}(\log(p(t, S)) - \log(p(t, T))) \\
+&= -\frac{\log(p(t, T)) - \log(p(t, S))}{T - S}
+\end{aligned}
+\]
+as required. If \(t = S\), then \(p(S, S) = 1\) and \(\log p(S, S) = 0\), and the rest is immediate.
+\end{proof}
+
+\begin{definition} \label{def:518}
+\index{Instantaneous forward rate}
+\index{Instantaneous short rate}
+The \textbf{instantaneous forward rate with maturity \(T\) contracted at time \(t\)} is
+\[
+f(t, T) = -\frac{\partial}{\partial T}\log p(t, T),
+\]
+while the \textbf{instantaneous short rate} at time \(t \in [0, T]\) is
+\[
+r(t) = f(t, t) = -\lim_{\Delta\rightarrow0}\frac{\log(p(t, t + \Delta)) - \log(p(t, t))}{\Delta}.
+\]
+\end{definition}
+
+\begin{remark} \label{rmk:519}
+For an infinitismal \(\Delta\) we have
+\[
+e^{r(t)\Delta} \approx \frac{p(t, t)}{p(t, t + \Delta)} = \frac{1}{p(t, t + \Delta)}.
+\]
+\end{remark}
+
+\begin{definition} \label{def:5110}
+\index{Money account process}
+\index{Risk-free asset}
+The \textbf{money market process}, or the \textbf{risk-free asset}, for \(t \in [0, T]\), is
+\[
+\beta(t) = \exp\left(\int_0^t r(s)ds\right)
+\]
+where \(r(\cdot)\) is the instantaneous short rate function.
+\end{definition}
+
+\begin{proposition} \label{prop:5111}
+A zero-coupon \(T\)-bond at time \(t\) has price
+\[
+p(t, T) = p(t, S)\exp\left(-\int_S^T f(t, u)du\right) \FORALL S \leq T
+\]
+and
+\[
+p(t, T) = \exp\left(-\int_t^T f(t, s) ds\right).
+\]
+\end{proposition}
+\begin{proof} The instantaneous forward rate \(f(t, u)\) can be written as
+\[
+f(t, u) = -\frac{\partial}{\partial u} \log p(t, u).
+\]
+\indent Hence, by the Fundamental Theorem of Calculus,
+\[
+\begin{aligned}
+& \int_S^T f(t, u)du = -\log p(t, T) + \log p(t, S) \\
+\Rightarrow &\int_S^T f(t, u)du = -\log\left(\frac{p(t, T)}{p(t, S)}\right)
+\end{aligned}
+\]
+and we have the result. \\
+\indent The second equation is the consequence of the fact that \(p(t, t) = 1\).
+\end{proof}
+
+\begin{definition} \label{def:5112}
+\index{Yield!Curve of zero-coupon bonds}
+\index{Yield!Function}
+\index{Yield!Zero-coupon bond}
+Define a function
+\[
+\begin{aligned}
+y: [0, \infty) \times \bR &\rightarrow \bR \\
+(t, T) &\mapsto R(t, T)
+\end{aligned}
+\]
+where
+\[
+R(t, T) = -\frac{\log p(t, T)}{T - t}.
+\]
+\indent \(R(t, T)\) is the \textbf{zero-coupon bond yield}. The map \((t, y(t, T))\) is the \textbf{yield curve of zero-coupon bonds}, and the function \(y\) is the \textbf{yield function}.
+\end{definition}
+
+\begin{remark} \label{rmk:5113}
+Note that
+\[
+p(t, T) = e^{-y(t, T)(T - t)}
+\]
+and the payoff, at time \(T\), of \$1 invested in a zero-coupon bond with maturity \(T\), is
+\[
+\frac{1}{p(t, T)} = e^{y(t, T)(T - t)}.
+\]
+\indent This shows that \(y(\cdot)\) is the rate of guaranteed return on the zero-coupon bond.
+\end{remark}
+
+%----------------------------------------------------------------------------------------
+
+\section{Zero-Coupon Bond Pricing and the Term Structure Equation}
+
+\begin{definition} \label{def:521}
+\index{Short rate!Model}
+The \textbf{short rate model} has the following setup:
+\begin{enumerate}
+\item The short rate at time \(t\) follows the process
+\[
+dr(t) = \mu(t, r(t))dt + \sigma(t, r(t))dW_t^P
+\]
+for some drift function \(\mu\), diffusion function \(\sigma\), and \(W_t^P\), the standard Brownian motion with respect to a physical probability measure \(P\).
+\item There is a risk-free asset whose price follows
+\[
+d\beta(t) = r(t)\beta(t)dt
+\]
+where \(\beta(t)\) is a \hyperref[def:5110]{money-market process}.
+\item For all \(T \geq 0\), there exists a market for the \(T\)-bond.
+\item For all \(T > 0\), the price of the \(T\)-bond at time \(t\) is of the form
+\[
+p(t, T) = F(t, r(t), T),
+\]
+which can also be written as
+\[
+p(t, T) = F^T(t, r), t \in [0, T]
+\]
+where \(F\) is a smooth function and satisfies the boundary condition \(F^T(T, r) = 1\).
+\end{enumerate}
+\end{definition}
+
+\begin{proposition} \label{prop:522}
+Under the short rate model, the dynamics of the \(T\)-bond price is
+\[
+dF^T = F^T\alpha_T(t)dt + F^T\sigma_T(t)dW_t^P
+\]
+where
+\[
+\begin{aligned}
+\alpha_T(t) &= \frac{1}{F^T}\left(F_t^T + \mu F_r^T + \frac12 \sigma^2F_{rr}^T\right) \\
+F_t^T &= \frac{\partial F^T}{\partial t}, F_r^T = \frac{\partial F^T}{\partial r}, F_{rr}^T = \frac{\partial^2 F^T}{\partial r\partial r}, \\
+\sigma_T(t) &= \frac{\sigma F_r^T}{F^T},
+\end{aligned}
+\]
+\(\mu\) and \(\sigma\) being the drift and diffusion of the short rate process \(r(t)\) respectively.
+\end{proposition}
+\begin{proof}
+Write \(Y_t = F^T(t, r(t))\) where
+\[
+dr(t) = \mu dt + \sigma dW_t^P
+\]
+as defined in the short rate model and use the \hyperref[thm:339]{Ito-Doeblin Lemma} to get
+\[
+\begin{aligned}
+dY_t &= dF^T(t, r(t)) \\
+&= \left(F_t^T + F_r^T\mu + \frac12 F_{rr}^T\sigma^2\right)dt + F_r^T\sigma dW_t^P \\
+&= F^T\left(\frac{1}{F^T}\right)\left(F_t^T + F_r^T\mu + \frac12 F_{rr}^T\sigma^2\right)dt + F^T\left(\frac{F_r^T\sigma}{F^T}\right)dW_t^P \\
+&= F^T\alpha_T(t)dt + F^T\sigma_T(t) dW_t^P
+\end{aligned}
+\]
+as required.
+\end{proof}
+
+\begin{proposition} \label{prop:523}
+Let \(\alpha_T\) and \(\sigma_T\) be the drift and diffusion of the \(T\)-bond price process in the short rate model, then, if the bond market is arbitrage-free, then there exists a stochastic process \(\{\lambda(t): t \geq 0\}\) such that
+\[
+\lambda(t) = \frac{\alpha_T(t) - r(t)}{\sigma_T(t)} \FORALL t \geq 0.
+\]
+\end{proposition}
+\begin{proof}
+We omit the proof.
+\end{proof}
+
+\begin{definition} \label{def:524}
+\index{Market price of risk}
+In an arbitrage-free bond market under the short rate model, the stochastic process
+\[
+\lambda(t) = \frac{\alpha_T(t) - r(t)}{\sigma_T(t)} \FORALL t \geq 0
+\]
+where \(\alpha_T(t)\) and \(\sigma_T(t)\) are the drift and diffusion of the \(T\)-bond price process, is called the \textbf{market price of risk}.
+\end{definition}
+
+\begin{remark} \label{rmk:525}
+In an arbitrage-free bond market under the short rate model, \(T\)-bonds of all maturities should have the same market price of risk. The substitution of \(\alpha_T(t)\) and \(\sigma_T(t)\) from \hyperref[prop:522]{Proposition 5.2.2} into \hyperref[def:524]{Def. 5.2.4} yields the following formal definition.
+\end{remark}
+
+\begin{definition} \label{def:526}
+\index{Term structure equation}
+Let \(F^T(t, r(t))\) be a \(T\)-bond price process in a short rate model with the usual definitions of \(\mu\) and \(\sigma\), then the \textbf{term structure equation} is as follows:
+\[
+\left\{
+\begin{array}{rl}
+F_t^T + (\mu - \lambda\sigma)F_r^T + \frac12\sigma^2F_{rr}^T - rF^T &= 0 \\
+F^T(T, r) &= 1
+\end{array}
+\right.
+\]
+for some real-valued process \(\{\lambda(t): t \geq 0\}\). Note that both \(\mu\) and \(\sigma\) are also functions of \(t\).
+\end{definition}
+
+\begin{theorem} \label{thm:527}
+In an arbitrage-free bond market under the short rate model, the zero-coupon bond prices \(p(t, T)\) are given by
+\[
+p(t, T) = F^T(t, r) = E^Q\left(\exp\left(\left.-\int_t^T r(s)ds\right)\right|\F_t\right)
+\]
+where \(Q\) is a probability measure such that
+\[
+dr(s) = (\mu - \sigma\lambda)ds + \sigma dW_s^Q
+\]
+with initial condition \(r(t) \in \bR\).
+\end{theorem}
+\begin{proof}
+Direct application of \hyperref[thm:416]{Feynman-Kac Theorem}.
+\end{proof}
+
+\begin{corollary} \label{cor:528}
+\index{Risk-Neutral Valuation of Interest-Rate Derivatives}
+The time-\(t\)-risk-neutral price of an interest-rate-contingent claim \(X\) paying \(X(T) = \Phi(r(T))\) at maturity \(T\) is given by
+\[
+X(t) = E^Q\left(\left.\Phi(r(T))\exp\left(-\int_t^T r(s)ds\right)\right|\F_t\right)
+\]
+where the \(Q\)-dynamic of the short rate is given by
+\[
+\begin{aligned}
+dr(s) &= (\mu = \lambda\sigma)ds + \sigma dW_s^Q \\
+r(t) &= r \in \bR.
+\end{aligned}
+\]
+\end{corollary}
+\begin{proof}
+We omit the proof.
+\end{proof}
+
+\begin{proposition} \label{prop:529}
+The relationship between probability measures \(P\) and \(Q\) in the short rate model and the risk-neutral valuation formula is
+\[
+dW^Q(t) = dW^P(t) + \lambda dt
+\]
+where \(\lambda\) is the market price of risk.
+\end{proposition}
+\begin{proof}
+Under \(P\) we have
+\[
+dr(t) = \mu dt + \sigma dW_t^P
+\]
+by \hyperref[def:521]{Def. 5.2.1}, while under \(Q\) we have
+\[
+dr(t) = (\mu - \lambda\sigma)dt + \sigma dW_t^Q.
+\]
+\indent By equating the two expressions, we have
+\[
+dW_t^P + \lambda dt = dW_t^Q
+\]
+as required.
+\end{proof}
+
+\begin{corollary} \label{cor:5210}
+Under the probability measure \(Q\) yielded in \hyperref[cor:528]{Corollary 5.2.8}, the price of \(T\)-bonds under the short rate model follows the dynamic
+\[
+dF^T = r(t)F^Tdt + F^T\sigma_T(t) dW_t^Q.
+\]
+\end{corollary}
+\begin{proof}
+By \hyperref[prop:522]{Proposition 5.2.2} we have
+\[
+dF^T = \alpha_T(t)F^Tdt + F^T\sigma_T(t)dW_t^P.
+\]
+\indent Substitute in \hyperref[prop:529]{Proposition 5.2.9} to get
+\[
+dF^T = F^T\alpha_T(t)dt + F^T\sigma_T(t)(dW_t^Q - \lambda dt).
+\]
+\indent Now \(\lambda(t) = (\alpha_T(t) - r(t)) / \sigma_T(t)\), so
+\[
+\begin{aligned}
+dF^T &= F^T\alpha_T(t)dt + F^T\sigma_T(t)\left(dW_t^Q - \frac{\alpha_T(t) - r(t)}{\sigma_T(t)}dt\right) \\
+&= F^T\alpha_T(t)dt + F^T\sigma_T(t)dW_t^Q - F^T(\alpha_T(t) - r(t))dt \\
+&= F^Tr(t)dt + F^T\sigma_T(t)dW_t^Q
+\end{aligned}
+\]
+as required.
+\end{proof}
+
+\begin{corollary} \label{cor:5211}
+Under the risk-neutral probability \(Q\), the process
+\[
+\left\{\frac{F^T(t)}{\beta(t)}, t \geq 0\right\}
+\]
+in the short rate model is a martingale.
+\end{corollary}
+\begin{proof}
+Define a function
+\[
+\begin{aligned}
+f:[0, T] \times \bR &\rightarrow \bR \\
+(t, x) &\mapsto \frac{x}{t}
+\end{aligned}
+\]
+and define \(Y_t := f(t, F^T)\). \\
+\indent It follows that
+\[
+f_t = (-1)(\beta(t))^{-2}\left(\frac{d\beta}{dt}\right)(F^T)
+\]
+where \(d\beta(t) = r(t)\beta(t)dt\) by the assumption of the short rate model, so
+\[
+f_t(t, F^T) = \frac{-1}{\beta(t)^2}r(t)\beta(t)F^T = -\frac{r(t)}{\beta(t)}F^T.
+\]
+\indent Also,
+\[
+f_x(t, F^T) = \frac{1}{\beta(t)}, f_{xx}(t, F^T) = 0.
+\]
+\indent By the \hyperref[thm:339]{Ito-Doeblin Lemma}, 
+\[
+\begin{aligned}
+dY_t &= f_t(t, F^T)dt + f_x(t, F^T)dF^T \\
+&= -\frac{-r(t)}{\beta(t)}F^Tdt + \frac{1}{\beta(t)}dF^T \\
+&= -\frac{r(t)}{\beta(t)}F^Tdt + \frac{1}{\beta(t)}(r(t)F^Tdt + F^T\sigma_T(t)dW_t^Q) \\
+&= F^T\sigma_T(t)dW_t^Q
+\end{aligned}
+\]
+\indent \(dY_t\) has no drift term, so by \hyperref[thm:333]{Thm. 3.3.3}, \(Y_t\) is a martingale. By the construction of \(\{Y_t\}_t\), this completes the proof.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+
+\section{Martingale Models for the Short Rate}
+
+\begin{definition} \label{def:531}
+\index{Vasicek model}
+\index{Cox-Ingersoll-Ross model}
+\index{CIR model|see{Cox-Ingersoll-Ross model}}
+\index{Dothan model}
+\index{Ho-Lee model}
+\index{Black-Derman-Toy model}
+\index{Hull-White model}
+Let \(Q\) be the risk-neutral measure under a short rate model. The following are models for the short rate under \(Q\):
+\begin{enumerate}
+\item The \textbf{Varsicek model} states
+\[
+dr = (b - ar)dt + \sigma dW_t^Q, a > 0.
+\]
+\item The \textbf{Cox-Ingersoll-Ross (CIR) model} states
+\[
+dr = a(b - r)dt + \sigma\sqrt{r}dW_t^Q.
+\]
+\item The \textbf{Dothan model} states
+\[
+dr = ar dt + \sigma rdW_t^Q.
+\]
+\item The \textbf{Ho-Lee model} states
+\[
+dr = \Omega(t)dt + \sigma dW_t^Q
+\]
+where \(\Omega\) is a function of time \(t\) chosen such that the model fits the original term structure.
+\item The \textbf{Black-Derman-Toy model} states
+\[
+dr = \Omega(t) rdt + \sigma(t)rdW_t^Q
+\]
+where \(\Omega\) and \(\sigma\) are both functions of time \(t\).
+\item The \textbf{Hull-White one-factor model} states
+\[
+dr = (\Omega(t) - a(t)r)dt + \sigma(t)dW_t^Q, a(t) > 0,
+\]
+where \(\Omega\), \(a\), and \(\sigma\) are functions of time \(t\).
+\item The \textbf{Hull-White two-factor model} states
+\[
+dr = (\Omega(t) - a(t)r)dt + \sigma(t)\sqrt{r} dW_t^Q, a(t) > 0,
+\]
+where \(\Omega\), \(a\), and \(\sigma\) are functions of time \(t\).
+\end{enumerate}
+\indent In general, these models specify the dynamic for
+\[
+dr = \tilde{\mu}(t, r(t); \alpha)dt + \sigma(t, r(t); \alpha)dW_t^Q
+\]
+under probability measure \(Q\) for some functions \(\tilde{\mu}\) and \(\sigma\) of time \(t\), where \(\alpha\) can be a vector or a function, and contains additional parameters for \(\tilde{\mu}\).
+\end{definition}
+
+\begin{definition} \label{def:532}
+\index{Inverting the yield curve}
+\index{Term structure!Theoretical}
+\index{Term structure!Empirical}
+Given a particular model for the short rate \(r\):
+\[
+dr = \tilde{\mu}(t, r(t); \alpha)dt + \sigma(t, r(t); \alpha)dW^Q,
+\]
+the \textbf{"inverting the yield curve" procedure} for estimating \(\alpha\) is as follows:
+\begin{enumerate}
+\item Solve, for every maturity \(T\), the term structure equation
+\[
+\left\{
+\begin{array}{rl}
+F_t^T + \tilde{\mu}F_r^T + \frac12 F_{rr}^T - rF^T &= 0 \\
+F^T(T, r) &= 1
+\end{array}
+\right.
+\]
+to obtain the zero-coupon prices \(p(0, T; \alpha)\) for \(T \geq 0\). Denote the results as \(\{T, p(0, T; \alpha)\}\), the \textbf{theoretical term structure}.
+\item Collect empirical data from the bond market for all maturities \(T\). Denote this \(\{T, p^*(0, T)\}\), the \textbf{empirical term structure}.
+\item Choose \(\alpha\) such that \(\{T, p(0, T;\alpha)\}\) fits \(\{T, p^*(0, T)\}\) based on some fitting criteria. Denote the optimal parameter to be \(\alpha^*\).
+\item Insert \(\alpha^*\) into \(\tilde{\mu}\) and \(\sigma\), and denote the estimated functions to be \(\mu^*\) and \(\sigma^*\). 
+\item Use
+\[
+dr = \mu^*(t, r(t); \alpha^*)dt + \sigma^*(t, r(t); \alpha^*)dW^Q
+\]
+to compute prices of interest rate derivatives with the methodology of \hyperref[cor:528]{Corollary 5.2.8}.
+\end{enumerate}
+\end{definition}
+
+\begin{definition} \label{def:533}
+\index{Term structure!Affine}
+\index{ATS|see{Term structure}}
+Suppose \(\{p(t, T): t \in [0, T], T \geq 0\}\) is a term structure of zero-coupon bond prices and each \(p(t, T)\) has the form
+\[
+p(t, T) = F(t, r(t), T)
+\]
+where
+\[
+F(t, r(t), T) = e^{A(t, T) - B(t, T)r}
+\]
+and \(A\) and \(B\) are deterministic functions, then the model of the bond prices is said to possess an \textbf{affine term structure (ATS)}.
+\end{definition}
+
+\begin{definition} \label{def:534}
+\index{Short rate!Mean-reverting}
+For a short rate model
+\[
+dr = \tilde{\mu}dt + \sigma dW_t^Q
+\]
+under some probability measure \(Q\), the model is \textbf{mean-reverting} is the mean of \(r\) tends to a constant level in the long run.
+\end{definition}
+
+\begin{proposition} \label{prop:535}
+Suppose the short rate follows a dynamic
+\[
+dr = \tilde{\mu}(t, r(t); \alpha)dt + \sigma(t. r(t); \alpha)dW^Q
+\]
+where \(\tilde{\mu}\) and \(\sigma\) have the form
+\[
+\left\{
+\begin{array}{rl}
+\tilde{\mu}(t, r(t)) &= \alpha(t)r + \beta(t) \\
+\sigma(t, r(t)) &= \sqrt{\gamma(t)r + \delta(t)},
+\end{array}
+\right.
+\]
+then the model admits an affine term structure where \(A\) and \(B\) satisfy the system
+\[
+\left\{
+\begin{array}{rl}
+B_t(t, T) + \alpha(t)B(t, T) - \frac12\gamma(t)B^2(t, T) &= -1 \\
+B(T, T) &= 0,
+\end{array}
+\right.
+\]
+\[
+\left\{
+\begin{array}{rl}
+A_t(t, T) &= \beta(t)B(t, T) - \frac12\delta(t)B^2(t, T) \\
+A(T, T) &= 0.
+\end{array}
+\right.
+\]
+\end{proposition}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{corollary} \label{cor:536}
+The Vasicek model for short rate
+\[
+dr = (b - ar)dt + \sigma dW_t^Q
+\]
+possess affine term structure
+\[
+p(t, T) = e^{A(t, T) - B(t, T)r(t)}
+\]
+where
+\[
+\begin{aligned}
+A(t, T) &= \frac{(B(t, T) - T + t)\left(ab - \frac12\sigma^2\right)}{a^2} - \frac{\sigma^2B^2(t, T)}{4a} \\
+B(t, T) &= \frac1a(1 - e^{-a(T - t)}.
+\end{aligned}
+\]
+\end{corollary}
+\begin{proof} By \hyperref[prop:535]{Proposition 5.3.5}, we solve for \(A\) and \(B\) in systems
+\[
+\left\{
+\begin{array}{rl}
+B_t(t, T) + (-a)B(t, T) &= -1 \\
+B(T, T) &= 0,
+\end{array}
+\right.
+\]
+\[
+\left\{
+\begin{array}{rl}
+A_t(t, T) &= bB(t, T) - \frac12\sigma^2B^2(t, T) \\
+A(T, T) &= 0.
+\end{array}
+\right.
+\]
+\indent The first system easily yields
+\[
+B(t, T) = \frac1a(1 - e^{-a(T - t)}),
+\]
+and integrating the second system yields
+\[
+A(t, T) = \frac{\sigma^2}{2}\int_t^TB^2(s, T)ds - b\int_t^TB(s, T)ds,
+\]
+and substitution yields
+\[
+A(t, T) = \frac{\sigma^2}{2}\int_t^T\frac{1}{a^2}(1 - e^{-a(T - s)})^2ds - b\int_t^T\frac1a(1 - e^{-a(T - s)})ds.
+\]
+\indent Integrating this yields the result.
+\end{proof}
+
+\begin{remark} \label{rmk:537}
+\begin{enumerate}
+\item The Vasicek model is mean-reverting with mean of \(r\) to be \(\frac b a\).
+\item In the Vasicek, Ho-Lee, and Hull-White one-factor models, the integral \(\int r(s)ds\) has a normal distribution.
+\item Hence, the short rate \(r\) in the Vasicek model might become negative.
+\end{enumerate}
+\end{remark}
+
+\begin{corollary} \label{cor:538}
+Suppose the short rate follows a Ho-Lee model
+\[
+dr = \Omega(t)dt + \sigma dW_t^Q
+\]
+where, at \(t = 0\), \(\Omega(t)\) follows
+\[
+p(0, T) = p^*(0, T), \text{ the observed \(T\)-bond price},
+\]
+and
+\[
+\Omega(t) = \frac{\partial f^*}{\partial T}(0, t) + \sigma^2t
+\]
+where \(f^*(0, t)\) denotes the observed forward rates. Then, the \(T\)-bond price has closed-form expression
+\[
+p(t, T) = \frac{p^*(0, T)}{p(0, t)}\exp\left((T - t)f^*(0, t) - \frac{\sigma^2}{2}t(T - t)^2 - (T - t)r(t)\right).
+\]
+\end{corollary}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{corollary} \label{cor:539}
+Suppose the short rate follows a CIR model
+\[
+dr = a(b - r)dt + \sigma\sqrt{r}dW_t^Q,
+\]
+then the bond prices are given by
+\[
+F^T(t, r) = A_0(T - t)e^{-B(T - t)r},
+\]
+where
+\[
+\begin{aligned}
+B(x) &= \frac{2(e^{\gamma x} - 1)}{(\gamma + \alpha)(e^{\gamma x} - 1) + 2\gamma} \\
+A_0(x) &= \left(\frac{2\gamma e^{(a + \gamma)(x / 2)}}{(\gamma + a)(e^{\gamma x} - 1) + 2\gamma}\right)^{2ab/\sigma^2} \\
+\gamma &= \sqrt{a^2 + 2\sigma^2}.
+\end{aligned}
+\]
+\end{corollary}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{remark} \label{rmk:5310}
+In the CIR model, there is mean reversion for \(p(t, T)\), \(r\) is always positive, the volatility of \(r\) depends on \(r\), and \(r\) follows a chi-squared distribution, but we are unable to fir the time-0 observed prices of bonds.
+\end{remark}
+
+\begin{definition} \label{def:5311}
+\index{Bond options}
+A \textbf{European bond call option} with strike \(K\) and expiration \(S\) on a \(T\)-bond where \(S < T\) gives the option holder the right but not the obligation to buy a \(T\)-bond at \(K\) at time \(S\). \\
+A \textbf{European bond put option} with strike \(K\) and expiration \(S\) on a \(T\)-bond where \(S < T\) gives the option holder the right but not the obligation to sell a \(T\)-bond at \(K\) at time \(S\).
+\end{definition}
+
+\begin{proposition} \label{prop:5312}
+Suppose the short rate follows the Vasicek model
+\[
+dr = (b - ar)dt + \sigma dW_t^Q, a > 0,
+\]
+then the price of a European bond call option with strike \(K\), expiration \(S\), on a \(T\)-bond at time \(t \in [0, S]\) is
+\[
+c(t, S, K, T) = p(t, T)N(d) - p(t, S)KN(d - \sigma_p)
+\]
+where
+\[
+\begin{aligned}
+d &= \frac{1}{\sigma_p}\log\left(\frac{p(t, T)}{p(t, S)K}\right) + \frac12\sigma_p, \\
+\sigma_p &= \frac{1}{a}(1 - e^{-a(T - S)})\sqrt{\frac{\sigma^2}{2a}(1 - e^{-2a(T - t)})},
+\end{aligned}
+\]
+and \(N(\cdot)\) is the distribution function of the standard normal distribution.
+\end{proposition}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+\begin{proposition}
+Suppose the short rate follows the Ho-Lee model
+\[
+dr = \Omega(t)dt + \sigma dW_t^Q,
+\]
+where
+\[
+\Omega(t) = \frac{\partial f^*}{\partial T}(0, t) + \sigma^2 t,
+\]
+then the price of a European call option with strike \(K\), expiration \(S\) on a \(T\)-bond at time \(t \in [0, S]\) is
+\[
+c(t, S, K, T) = p(t, T)N(d) - p(t, S)KN(d - \sigma_p),
+\]
+where
+\[
+\begin{aligned}
+d &= \frac{1}{\sigma_p}\log\left(\frac{p(t, T)}{p(t, S)K}\right) + \frac12\sigma_p,\\
+\sigma_p &= \sigma(T - S)\sqrt{S - t},
+\end{aligned}
+\]
+and \(N(\cdot)\) is the distribution function of the standard normal distribution.
+\end{proposition}
+\begin{proof}
+    We omit the proof.
+\end{proof}
+
+%------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+\cleardoublepage % Make sure the index starts on an odd (right side) page
+\phantomsection
+\setlength{\columnsep}{0.75cm} % Space between the 2 columns of the index
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}} % Add an Index heading to the table of contents
+\printindex % Output the index
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
