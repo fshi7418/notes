@@ -114,7 +114,7 @@
 
 \chapterimage{chapter_head_1.pdf} % Chapter heading image
 
-\chapter{Basic Definitions}
+\chapter{Fundamental Concepts}
 
 \section{Baskets}
 
@@ -131,11 +131,11 @@ and the set of positive real numbers is \(\bR^+ := \bR \setminus \{0\}\),
 \begin{definition} \label{def:112}
 \index{Financial instrument}
 \index{Base currency}
-Fix a currency \(C_B\), a \textbf{financial instrument} \(I\) with respect to \(C_B\) is a 2-tuple
+Fix a currency \(C_B\), a \textbf{financial instrument} \(I\) with respect to \(C_B\) is a 3-tuple
 \[
-(P_t, F_t)
+(Q_t, P_t, F_t)
 \]
-where \(P_t \in \bR^+\) is a random variable that represents the price of the instrument at time \(t\) and
+where \(Q_t \in \bR\) is the quantity of the instrument in existence at time \(t\), \(P_t \in \bR^+\) is a random variable that represents the price of the instrument at time \(t\) and
 \(F_t \in \bR^+\) is such that \(P_tF_t\) represents the price of the instrument in \(C_B\) at time \(t\).\\
 The currency \(C_B\) is known as the \textbf{base currency}.
 \end{definition}
@@ -152,22 +152,23 @@ instrument that is not a cash instrument is a \textbf{non-cash instrument}.
 \index{Quantity vector}
 Fix a currency \(C_B\), a \textbf{non-cash basket} or a \textbf{market basket} of size \(n\) is a finite set of non-cash instruments
 \[
-\{I_1 := (P^1_t, F^1_t), \ldots, I_n := (P_t^n, F_t^n)\}
+\{I_1 := (Q^1_t, P^1_t, F^1_t), \ldots, I_n := (Q_t^n, P_t^n, F_t^n)\}
 \]
-coupled with a \textbf{quantity vector} \(a := [a_1, \ldots, a_n]^T \in \bR^n\) where each \(a_i \in \bR\) represents the amount of 
-\(I_i\) held in the basket, \(P_t^i \in \bR^+\) represents the price of \(I_i\) at time \(t\), and \(F_t^i \in \bR^+\) is 
+where \(Q_t^i \in \bR\) represents the amount of \(I_i\) held at time \(t\), 
+\(P_t^i \in \bR^+\) represents the price of \(I_i\) at time \(t\), and \(F_t^i \in \bR^+\) is 
 such that \(P_t^iF_t^i\) represents the price of \(I_i\) in currency \(C_B\) at time \(t\).\\
 A \textbf{cash basket} of size \(m\) is a finite set of cash instruments
 \[
-\{C_1 := (1, F_t^1), \ldots, C_m := (1, F_t^m)\}
+\{C_1 := (q_t^1, 1, f_t^1), \ldots, C_m := (q_t^m, 1, f_t^m)\}.
 \]
-coupled with a \textbf{quantity vector} \(q := [q_1, \ldots, q_m]^T \in \bR^n\) where each \(q_i \in \bR\). 
 \end{definition}
 
 \begin{remark} \label{rmk:115}
 \index{Local currency}
-Whenever a market instrument or a cash instrument is discussed, it is always with respect to a base currency \(C_B\). This is because the instruments in general might
-be in many different currencies, commonly referred to as \textbf{local currencies}. Due to reasons beyond the scope of this note, given two local currencies \(C_1\) 
+Whenever a market instrument or a cash instrument is discussed, it is always with respect to a base currency 
+\(C_B\). This is because the instruments in general might
+be in many different currencies, commonly referred to as \textbf{local currencies}. Due to reasons beyond the 
+scope of this note, given two local currencies \(C_1\) 
 and \(C_2\), it is in general not true that 1 \(C_1\) can buy the same amount of things as 1 \(C_2\). Because of this, to compare the prices of two instruments in different
 currencies fairly, we need to convert their local currencies into the same currency. That currency we convert to is the base currency \(C_B\).
 \end{remark}
@@ -180,6 +181,24 @@ A \textbf{bundle} is a financial instrument with a representation of a 2-tuple
 \]
 where \(M\) is a market basket and \(C\) is a cash basket such that \(M\) and \(C\) share the same base currency \(C_B\).
 \end{definition}
+
+\begin{proposition} \label{prop:117}
+The cash value of a bundle \((M, C)\) at time \(t\) in base currency \(C_B\) is
+\[
+P_b(t) = P_M(t) + P_C(t)
+\]
+where \(P_M(t)\), the price of the market basket at time \(t\) in base currency \(C_B\), is given by
+\[
+P_M(t) = \sum_{i=1}^n Q_t^iP_t^iF_t^i,
+\]
+and \(P_C(t)\), the price of the cash basket at time \(t\) in base currency \(C_B\), is given by
+\[
+P_C(t) = \sum_{i=1}^m q_t^if_t^i.
+\]
+\end{proposition}
+\begin{proof}
+This is straightforward by the definition of the bundle and the baskets.
+\end{proof}
 
 %------------------------------------------------
 
@@ -198,7 +217,7 @@ A \textbf{portfolio} is a finite set of financial instruments
 \index{Subscription!Cash}
 \index{Redemption!In-kind}
 \index{Redemption!Cash}
-Given a portfolio \(P := \{I_1, \ldots, I_n\}\), a bundle \((M, C)\) with associated with quantity vectors \(a, q\), an \textbf{in-kind subscription} is defined as the operation
+Given a portfolio \(P := \{I_1, \ldots, I_n\}\), a bundle \((M, C)\), an \textbf{in-kind subscription} is defined as the operation
 \[
 P \cup \{(M, C)\} \setminus (M \cup C),
 \]
