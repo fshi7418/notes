@@ -149,18 +149,19 @@ instrument that is not a cash instrument is a \textbf{non-cash instrument}.
 \begin{definition} \label{def:114}
 \index{Market basket}
 \index{Cash basket}
-Fix a currency \(C_B\), a \textbf{non-cash basket} of size \(n\) is a finite set of non-cash instruments
+\index{Quantity vector}
+Fix a currency \(C_B\), a \textbf{non-cash basket} or a \textbf{market basket} of size \(n\) is a finite set of non-cash instruments
 \[
 \{I_1 := (P^1_t, F^1_t), \ldots, I_n := (P_t^n, F_t^n)\}
 \]
-coupled with a vector \(a := [a_1, \ldots, a_n]^T \in \bR^n\) where each \(a_i \in \bR\) represents the amount of 
+coupled with a \textbf{quantity vector} \(a := [a_1, \ldots, a_n]^T \in \bR^n\) where each \(a_i \in \bR\) represents the amount of 
 \(I_i\) held in the basket, \(P_t^i \in \bR^+\) represents the price of \(I_i\) at time \(t\), and \(F_t^i \in \bR^+\) is 
 such that \(P_t^iF_t^i\) represents the price of \(I_i\) in currency \(C_B\) at time \(t\).\\
 A \textbf{cash basket} of size \(m\) is a finite set of cash instruments
 \[
 \{C_1 := (1, F_t^1), \ldots, C_m := (1, F_t^m)\}
 \]
-coupled with a vector \(q := [q_1, \ldots, q_m]^T \in \bR^n\) where each \(q_i \in \bR\). 
+coupled with a \textbf{quantity vector} \(q := [q_1, \ldots, q_m]^T \in \bR^n\) where each \(q_i \in \bR\). 
 \end{definition}
 
 \begin{remark} \label{rmk:115}
@@ -173,7 +174,7 @@ currencies fairly, we need to convert their local currencies into the same curre
 
 \begin{definition} \label{def:116}
 \index{Bundle}
-A \textbf{bundle} is a 2-tuple
+A \textbf{bundle} is a financial instrument with a representation of a 2-tuple
 \[
 (M, C)
 \]
@@ -185,10 +186,44 @@ where \(M\) is a market basket and \(C\) is a cash basket such that \(M\) and \(
 \section{Subscription and Redemption}
 
 \begin{definition} \label{def:121}
-\index{Issuer}
-Someone who defines a specific instance of a bundle by specifiying the vectors \(a\) and \(q\) and the corresponding 
-instruments \(I_i\) and \(C_i\) in the baskets \(M\) and \(C\), is known as an \textbf{issuer}.
+\index{Portfolio}
+A \textbf{portfolio} is a finite set of financial instruments
+\[
+\{I_1, \ldots, I_n\}.
+\]
 \end{definition}
+
+\begin{definition} \label{def:122}
+\index{Subscription!In-kind}
+\index{Subscription!Cash}
+\index{Redemption!In-kind}
+\index{Redemption!Cash}
+Given a portfolio \(P := \{I_1, \ldots, I_n\}\), a bundle \((M, C)\) with associated with quantity vectors \(a, q\), an \textbf{in-kind subscription} is defined as the operation
+\[
+P \cup \{(M, C)\} \setminus (M \cup C),
+\]
+and an \textbf{in-kind redemption} is defined as the operation
+\[
+P \setminus \{(M, C)\} \cup (M \cup C).
+\]
+\indent At a fixed time \(t\), suppose \(M\) has price \(P_M(t)\) and \(C\) has price \(P_C(t)\) in base currency
+\(C_B\). Define a cash basket \(B := \{(1, 1)\}\) with 1-dimensional quantity vector \([P_M(t) + P_C(t)]\), then a \textbf{cash subscription} is the operation
+\[
+P \cup \{(M, C)\} \setminus \{B\}
+\]
+and a \textbf{cash redemption} is the operation
+\[
+P \cup \{B\} \setminus \{(M, C)\}.
+\]
+\end{definition}
+
+\begin{remark} \label{rmk:123}
+In words, an in-kind subscription (redemption) is to give away the baskets (bundle) and get back the bundle
+(baskets). On the other hand, a cash subscription is to give away the cash value of the baskets and get back the
+bundle, while a cash redemption is to give away the bundle and get back the cash value of the baskets. Both cash
+subscription and redemption is done in the base currency \(C_B\).
+\end{remark}
+
 
 
 %------------------------------------------------
